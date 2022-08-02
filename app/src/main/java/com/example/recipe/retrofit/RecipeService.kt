@@ -12,4 +12,7 @@ interface RecipeService {
 
     @GET("/recipes/{id}/information")
     fun getRecipeInformation(@Path("id") id: Int, @Query("apiKey") apiKey: String, @Query("includeNutrition") includeNutrition: Boolean): List<Recipe>
+
+    @GET("/recipes/autocomplete")
+    fun getRecipeAutocomplete(@Query("apiKey") apiKey: String, @Query("number") number: Int, @Query("query") query: String): List<Recipe>
 }
