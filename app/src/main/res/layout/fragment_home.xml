@@ -8,6 +8,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <include
+        android:id="@+id/recipe_item"
         layout="@layout/recipe_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
