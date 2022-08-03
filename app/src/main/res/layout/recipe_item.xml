@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/SaveRecipe"
@@ -20,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/black"
-            tools:src="@drawable/ic_bookmark_24" />
+            android:src="@drawable/ic_bookmark_24" />
 
         <TextView
             android:id="@+id/RecipeTitle"
@@ -45,7 +43,7 @@
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/SaveRecipe"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/ic_launcher_background" />
+            android:src="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/Time"
@@ -63,6 +61,4 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/RecipeTitle" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</merge>
+</androidx.constraintlayout.widget.ConstraintLayout>
