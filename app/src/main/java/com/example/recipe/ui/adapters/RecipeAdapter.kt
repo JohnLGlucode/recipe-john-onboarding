@@ -9,7 +9,8 @@ import com.example.recipe.databinding.RecipeItemBinding
 import com.example.recipe.ui.fragments.saved.RecipeViewData
 
 class RecipeAdapter(
-    private val recipes: List<RecipeViewData>
+    private val recipes: List<RecipeViewData>,
+    private var onRecipeClicked: ((recipe: RecipeViewData) -> Unit)
 ): RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
 
     lateinit var binding: RecipeItemBinding
@@ -25,7 +26,7 @@ class RecipeAdapter(
 
     override fun getItemCount(): Int = recipes.size
 
-    class ViewHolder(
+    inner class ViewHolder(
         private val binding: RecipeItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -45,6 +46,8 @@ class RecipeAdapter(
             } else {
                 binding.SaveRecipe.setImageResource(R.drawable.ic_bookmark_border_24)
             }
+
+            binding.root.setOnClickListener { onRecipeClicked(recipe) }
         }
 
     }

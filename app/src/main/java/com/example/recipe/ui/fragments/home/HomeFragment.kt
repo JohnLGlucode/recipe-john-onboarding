@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.recipe.R
 import com.example.recipe.databinding.FragmentHomeBinding
+import com.example.recipe.ui.fragments.saved.RecipeViewData
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -41,6 +43,10 @@ class HomeFragment : Fragment() {
                 .centerCrop()
                 .placeholder(R.drawable.ic_baseline_fastfood)
                 .into(binding.recipeItem.RecipeImage)
+
+            binding.root.setOnClickListener {
+                goToRecipeDetail(viewData.recipe)
+            }
         }
     }
 
@@ -48,4 +54,9 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun goToRecipeDetail(recipe: RecipeViewData) {
+        findNavController().navigate(R.id.action_navigation_home_to_navigation_recipe_detail)
+    }
+
 }

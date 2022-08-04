@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.recipe.R
 import com.example.recipe.databinding.FragmentSavedBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
 
@@ -38,7 +40,9 @@ class SavedFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
 
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
-            val adapter = RecipeAdapter(viewData.searchRecipes)
+            val adapter = RecipeAdapter(viewData.searchRecipes) {
+                goToRecipeDetail(it)
+            }
 
             recyclerView.adapter = adapter
         }
@@ -48,4 +52,9 @@ class SavedFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun goToRecipeDetail(recipe: RecipeViewData) {
+        findNavController().navigate(R.id.action_navigation_saved_to_navigation_recipe_detail)
+    }
+
 }

@@ -5,4 +5,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_search">Search</string>
     <string name="title_saved">Saved</string>
+    <string name="title_recipe_details">Recipe Details</string>
 </resources>
