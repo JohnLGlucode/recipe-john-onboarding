@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipe.R
 import com.example.recipe.databinding.RecipeItemBinding
-import com.example.recipe.ui.fragments.search.SearchRecipeViewData
+import com.example.recipe.ui.fragments.saved.RecipeViewData
 
 class RecipeAdapter(
-    private val recipes: List<SearchRecipeViewData>
+    private val recipes: List<RecipeViewData>
 ): RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
 
     lateinit var binding: RecipeItemBinding
@@ -29,7 +29,7 @@ class RecipeAdapter(
         private val binding: RecipeItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(recipe: SearchRecipeViewData) {
+        fun bind(recipe: RecipeViewData) {
             binding.RecipeTitle.text = recipe.name
             binding.Time.text = recipe.prepTime
 
@@ -39,6 +39,12 @@ class RecipeAdapter(
                 .centerCrop()
                 .placeholder(R.drawable.ic_baseline_fastfood)
                 .into(binding.RecipeImage)
+
+            if (recipe.isSaved) {
+                binding.SaveRecipe.setImageResource(R.drawable.ic_bookmark_24)
+            } else {
+                binding.SaveRecipe.setImageResource(R.drawable.ic_bookmark_border_24)
+            }
         }
 
     }

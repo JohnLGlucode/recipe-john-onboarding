@@ -27,7 +27,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/black"
-                android:src="@drawable/ic_bookmark_24" />
+                android:src="@drawable/ic_bookmark_border_24" />
 
             <TextView
                 android:id="@+id/RecipeTitle"
