@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_navigation_recipe_detail"
-            app:destination="@id/navigation_recipe_detail" />
+            app:destination="@id/navigation_recipe_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popUpTo="@id/navigation_home"/>
     </fragment>
 
     <fragment
@@ -22,7 +24,9 @@
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_navigation_search_to_navigation_recipe_detail"
-            app:destination="@id/navigation_recipe_detail" />
+            app:destination="@id/navigation_recipe_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popUpTo="@id/navigation_search" />
     </fragment>
 
     <fragment
@@ -32,23 +36,15 @@
         tools:layout="@layout/fragment_saved" >
         <action
             android:id="@+id/action_navigation_saved_to_navigation_recipe_detail"
-            app:destination="@id/navigation_recipe_detail" />
+            app:destination="@id/navigation_recipe_detail"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popUpTo="@id/navigation_saved" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_recipe_detail"
         android:name="com.example.recipe.ui.fragments.recipeDetail.RecipeDetailFragment"
         android:label="@string/title_recipe_details"
-        tools:layout="@layout/fragment_recipe_detail" >
-        <action
-            android:id="@+id/action_navigation_recipe_detail_to_navigation_home"
-            app:destination="@id/navigation_home" />
-        <action
-            android:id="@+id/action_navigation_recipe_detail_to_navigation_search"
-            app:destination="@id/navigation_search" />
-        <action
-            android:id="@+id/action_navigation_recipe_detail_to_navigation_saved"
-            app:destination="@id/navigation_saved" />
-    </fragment>
+        tools:layout="@layout/fragment_recipe_detail" />
 
 </navigation>
