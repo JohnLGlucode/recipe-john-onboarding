@@ -1,4 +1,4 @@
-package com.example.recipe.ui.saved
+package com.example.recipe.ui.fragments.saved
 
 import android.os.Bundle
 import android.view.LayoutInflater

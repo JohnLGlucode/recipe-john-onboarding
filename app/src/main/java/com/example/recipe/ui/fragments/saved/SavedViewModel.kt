@@ -1,4 +1,4 @@
-package com.example.recipe.ui.saved
+package com.example.recipe.ui.fragments.saved
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

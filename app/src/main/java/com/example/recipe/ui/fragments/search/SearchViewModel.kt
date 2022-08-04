@@ -1,4 +1,4 @@
-package com.example.recipe.ui.search
+package com.example.recipe.ui.fragments.search
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
