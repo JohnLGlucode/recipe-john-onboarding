@@ -6,4 +6,7 @@
     <string name="title_search">Search</string>
     <string name="title_saved">Saved</string>
     <string name="title_recipe_details">Recipe Details</string>
+    <string name="title_details">Details</string>
+    <string name="title_instructions">Instructions</string>
+    <string name="title_ingredients">Ingredients</string>
 </resources>

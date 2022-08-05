@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.recipe.R
 import com.example.recipe.databinding.FragmentRecipeDetailBinding
+import com.example.recipe.ui.adapters.ViewPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
 
 class RecipeDetailFragment : Fragment() {
 
@@ -31,6 +33,21 @@ class RecipeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val tabArray = listOf<String>(
+            getString(R.string.title_details),
+            getString(R.string.title_ingredients),
+            getString(R.string.title_instructions)
+        )
+
+        val viewPager = binding.ViewPager2
+        val tabLayout = binding.TabLayout
+        val pagerAdapter = ViewPagerAdapter(getChildFragmentManager(), lifecycle)
+        viewPager.adapter = pagerAdapter
+
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = tabArray[position]
+        }.attach()
+
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
             Glide.with(binding.root)
                 .load(viewData.recipe.image)
@@ -38,6 +55,8 @@ class RecipeDetailFragment : Fragment() {
                 .fitCenter()
                 .placeholder(R.drawable.ic_baseline_fastfood)
                 .into(binding.Image)
+
+            binding.Name.text = viewData.recipe.name
         }
     }
 
