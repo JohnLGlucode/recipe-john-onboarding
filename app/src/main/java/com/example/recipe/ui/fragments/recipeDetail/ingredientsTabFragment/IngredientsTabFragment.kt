@@ -5,17 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.recipe.R
+import com.example.recipe.databinding.FragmentIngredientsTabBinding
 
 class IngredientsTabFragment : Fragment() {
 
+    private var _binding: FragmentIngredientsTabBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: IngredientsTabViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_ingredients_tab, container, false)
+        _binding = FragmentIngredientsTabBinding.inflate(inflater, container, false)
+
+        val root: View = binding.root
+
+        return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 }

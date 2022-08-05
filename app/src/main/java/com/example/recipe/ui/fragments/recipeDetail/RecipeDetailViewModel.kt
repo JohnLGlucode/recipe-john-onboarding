@@ -23,8 +23,28 @@ class RecipeDetailViewModel : ViewModel() {
                     name = "Salt",
                     unit = "Tonne",
                     MeasuresViewData(
-                        metric = MeasurementViewData(1.5, "Ton's"),
-                        us = MeasurementViewData(69.0, "Pounds")
+                        metric = "1.5 Tonnes",
+                        imperial = "69 Pounds"
+                    )
+                ),
+                IngredientsViewData(
+                    aisle = "Baking",
+                    image = "sugar.jpg",
+                    name = "Sugar",
+                    unit = "Grams",
+                    MeasuresViewData(
+                        metric = "110.5 Grams",
+                        imperial = "9 Stone"
+                    )
+                ),
+                IngredientsViewData(
+                    aisle = "Butchery",
+                    image = "mince-meat.jpg",
+                    name = "Mince Meat",
+                    unit = "Kilogram",
+                    MeasuresViewData(
+                        metric = "2 Kilogram",
+                        imperial = "13 Feet"
                     )
                 )
             ),
@@ -41,58 +61,20 @@ class RecipeDetailViewModel : ViewModel() {
                     StepViewData(
                         number = 1,
                         step = "Cook",
-                        length = StepLengthViewData(69, "Seconds"),
-                        ingredients = listOf(
-                            StepIngredientViewData(
-                                id = 1,
-                                name = "Salt",
-                                image = "salt.jpg"
-                            ),
-                            StepIngredientViewData(
-                                id = 2,
-                                name = "Sugar",
-                                image = "sugar.jpg"
-                            )
-                        )
+                        length = "69 Seconds",
+                        ingredients = "Sugar, Salt & Eggs"
                     ),
                     StepViewData(
                         number = 2,
                         step = "Bake",
-                        length = StepLengthViewData(420, "Minutes"),
-                        ingredients = listOf(
-                            StepIngredientViewData(
-                                id = 1,
-                                name = "Flour",
-                                image = "flour.jpg"
-                            ),
-                            StepIngredientViewData(
-                                id = 2,
-                                name = "Sugar",
-                                image = "sugar.jpg"
-                            ),
-                            StepIngredientViewData(
-                                id = 2,
-                                name = "Baking Powder",
-                                image = "baking-powder.jpg"
-                            )
-                        )
+                        length = "420 Minutes",
+                        ingredients = "Baking Powder, Rice, Coke & More Salt"
                     ),
                     StepViewData(
                         number = 3,
                         step = "Eat",
-                        length = StepLengthViewData(1, "Hours"),
-                        ingredients = listOf(
-                            StepIngredientViewData(
-                                id = 1,
-                                name = "Cola",
-                                image = "cola.jpg"
-                            ),
-                            StepIngredientViewData(
-                                id = 2,
-                                name = "Salad",
-                                image = "salad.jpg"
-                            )
-                        )
+                        length = "1 Hours",
+                        ingredients = "Bread, Water, Vodka & Tequila"
                     )
                 )
             )
@@ -131,13 +113,8 @@ data class IngredientsViewData(
 )
 
 data class MeasuresViewData(
-    val metric: MeasurementViewData,
-    val us: MeasurementViewData
-)
-
-data class MeasurementViewData(
-    val amount: Double,
-    val unitShort: String
+    val metric: String,
+    val imperial: String
 )
 
 data class AnalyzedInstructionsViewData(
@@ -148,17 +125,12 @@ data class AnalyzedInstructionsViewData(
 data class StepViewData(
     val number: Int,
     val step: String,
-    val ingredients: List<StepIngredientViewData>,
-    val length: StepLengthViewData
+    val ingredients: String,
+    val length: String
 )
 
 data class StepIngredientViewData(
     val id: Int,
     val name: String,
     val image: String
-)
-
-data class StepLengthViewData(
-    val number: Int,
-    val unit: String
 )

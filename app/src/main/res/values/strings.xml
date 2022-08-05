@@ -16,4 +16,8 @@
     <string name="title_cheap">Cheap</string>
     <string name="title_gluten_free">Gluten Free</string>
     <string name="title_dairy_free">Dairy Free</string>
+    <string name="title_metric">Metric</string>
+    <string name="title_imperial">Imperial</string>
+    <string name="title_step">Step</string>
+    <string name="title_step_length">Step Length</string>
 </resources>
