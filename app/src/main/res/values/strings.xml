@@ -9,4 +9,11 @@
     <string name="title_details">Details</string>
     <string name="title_instructions">Instructions</string>
     <string name="title_ingredients">Ingredients</string>
+    <string name="title_vegan">Vegan</string>
+    <string name="title_vegetarian">Vegetarian</string>
+    <string name="title_servings">Servings</string>
+    <string name="title_preparation_time">Preparation Time</string>
+    <string name="title_cheap">Cheap</string>
+    <string name="title_gluten_free">Gluten Free</string>
+    <string name="title_dairy_free">Dairy Free</string>
 </resources>

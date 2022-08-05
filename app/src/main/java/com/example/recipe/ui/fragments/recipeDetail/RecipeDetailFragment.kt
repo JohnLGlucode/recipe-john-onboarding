@@ -33,7 +33,7 @@ class RecipeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tabArray = listOf<String>(
+        val tabArray = listOf(
             getString(R.string.title_details),
             getString(R.string.title_ingredients),
             getString(R.string.title_instructions)
@@ -41,7 +41,7 @@ class RecipeDetailFragment : Fragment() {
 
         val viewPager = binding.ViewPager2
         val tabLayout = binding.TabLayout
-        val pagerAdapter = ViewPagerAdapter(getChildFragmentManager(), lifecycle)
+        val pagerAdapter = ViewPagerAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = pagerAdapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

@@ -1,15 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.recipeDetail.detailsTabFragment.DetailsTabFragment">
 
-    <TextView
-        android:gravity="center_horizontal|center_vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="details tab" />
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/Summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="summary goes here yay!!"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ServingsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_servings"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Summary" />
+
+        <TextView
+            android:id="@+id/Servings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="4"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ServingsTitle"
+            app:layout_constraintTop_toBottomOf="@+id/Summary" />
+
+        <TextView
+            android:id="@+id/PrepTimeTitle"
+            android:text="@string/title_preparation_time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ServingsTitle" />
+
+        <TextView
+            android:id="@+id/PrepTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="120 minutes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/PrepTimeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/Servings" />
+
+        <TextView
+            android:id="@+id/CheapTitle"
+            android:text="@string/title_cheap"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/PrepTimeTitle" />
+
+        <TextView
+            android:id="@+id/Cheap"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/CheapTitle"
+            app:layout_constraintTop_toBottomOf="@+id/PrepTime" />
+
+        <TextView
+            android:id="@+id/GlutenFreeTitle"
+            android:text="@string/title_gluten_free"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CheapTitle" />
+
+        <TextView
+            android:id="@+id/GlutenFree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/GlutenFreeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/Cheap" />
+
+        <TextView
+            android:id="@+id/DairyFreeTitle"
+            android:text="@string/title_dairy_free"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/GlutenFreeTitle" />
+
+        <TextView
+            android:id="@+id/DairyFree"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/DairyFreeTitle"
+            app:layout_constraintTop_toBottomOf="@+id/GlutenFree" />
+
+        <TextView
+            android:id="@+id/VegetarianTitle"
+            android:text="@string/title_vegetarian"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/DairyFreeTitle" />
+
+        <TextView
+            android:id="@+id/Vegetarian"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/VegetarianTitle"
+            app:layout_constraintTop_toBottomOf="@+id/DairyFree" />
+
+        <TextView
+            android:id="@+id/VeganTitle"
+            android:text="@string/title_vegan"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/VegetarianTitle" />
+
+        <TextView
+            android:id="@+id/Vegan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/VeganTitle"
+            app:layout_constraintTop_toBottomOf="@+id/Vegetarian" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
