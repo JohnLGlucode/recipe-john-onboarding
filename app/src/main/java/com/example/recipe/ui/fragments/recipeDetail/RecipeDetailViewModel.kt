@@ -32,7 +32,70 @@ class RecipeDetailViewModel : ViewModel() {
             vegan = true,
             glutenFree = true,
             dairyFree = true,
-            cheap = true
+            cheap = true,
+            summary = "this is the summary lol",
+            instructions = "instructions will go here one day",
+            analyzedInstruction = AnalyzedInstructionsViewData(
+                name = "",
+                steps = listOf(
+                    StepViewData(
+                        number = 1,
+                        step = "Cook",
+                        length = StepLengthViewData(69, "Seconds"),
+                        ingredients = listOf(
+                            StepIngredientViewData(
+                                id = 1,
+                                name = "Salt",
+                                image = "salt.jpg"
+                            ),
+                            StepIngredientViewData(
+                                id = 2,
+                                name = "Sugar",
+                                image = "sugar.jpg"
+                            )
+                        )
+                    ),
+                    StepViewData(
+                        number = 2,
+                        step = "Bake",
+                        length = StepLengthViewData(420, "Minutes"),
+                        ingredients = listOf(
+                            StepIngredientViewData(
+                                id = 1,
+                                name = "Flour",
+                                image = "flour.jpg"
+                            ),
+                            StepIngredientViewData(
+                                id = 2,
+                                name = "Sugar",
+                                image = "sugar.jpg"
+                            ),
+                            StepIngredientViewData(
+                                id = 2,
+                                name = "Baking Powder",
+                                image = "baking-powder.jpg"
+                            )
+                        )
+                    ),
+                    StepViewData(
+                        number = 3,
+                        step = "Eat",
+                        length = StepLengthViewData(1, "Hours"),
+                        ingredients = listOf(
+                            StepIngredientViewData(
+                                id = 1,
+                                name = "Cola",
+                                image = "cola.jpg"
+                            ),
+                            StepIngredientViewData(
+                                id = 2,
+                                name = "Salad",
+                                image = "salad.jpg"
+                            )
+                        )
+                    )
+                )
+            )
         )
     }
 
@@ -44,6 +107,7 @@ data class RecipeDetailViewData(
 
 data class RecipeDetailModel(
     val name: String,
+    val summary: String,
     val prepTime: String,
     val image: Uri,
     val isSaved: Boolean,
@@ -53,7 +117,9 @@ data class RecipeDetailModel(
     val glutenFree: Boolean,
     val dairyFree: Boolean,
     val cheap: Boolean,
-    val ingredients: List<IngredientsViewData>
+    val ingredients: List<IngredientsViewData>,
+    val instructions: String,
+    val analyzedInstruction: AnalyzedInstructionsViewData
 )
 
 data class IngredientsViewData(
@@ -72,4 +138,27 @@ data class MeasuresViewData(
 data class MeasurementViewData(
     val amount: Double,
     val unitShort: String
+)
+
+data class AnalyzedInstructionsViewData(
+    val name: String,
+    val steps: List<StepViewData>
+)
+
+data class StepViewData(
+    val number: Int,
+    val step: String,
+    val ingredients: List<StepIngredientViewData>,
+    val length: StepLengthViewData
+)
+
+data class StepIngredientViewData(
+    val id: Int,
+    val name: String,
+    val image: String
+)
+
+data class StepLengthViewData(
+    val number: Int,
+    val unit: String
 )
