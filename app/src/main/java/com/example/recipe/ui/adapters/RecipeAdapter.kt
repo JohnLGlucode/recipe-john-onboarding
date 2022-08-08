@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipe.R
-import com.example.recipe.databinding.RecipeItemBinding
+import com.example.recipe.databinding.ItemRecipeBinding
 import com.example.recipe.ui.fragments.saved.RecipeViewData
 
 class RecipeAdapter(
@@ -13,10 +13,10 @@ class RecipeAdapter(
     private var onRecipeClicked: ((recipe: RecipeViewData) -> Unit)
 ): RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
 
-    lateinit var binding: RecipeItemBinding
+    lateinit var binding: ItemRecipeBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = RecipeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = ItemRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -27,7 +27,7 @@ class RecipeAdapter(
     override fun getItemCount(): Int = recipes.size
 
     inner class ViewHolder(
-        private val binding: RecipeItemBinding
+        private val binding: ItemRecipeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(recipe: RecipeViewData) {
