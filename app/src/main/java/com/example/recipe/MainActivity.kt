@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
             if (nd.id == R.id.navigation_home ||
-                nd.id == R.id.navigation_saved ||
+                nd.id == R.id.navigation_search ||
                 nd.id == R.id.navigation_saved
             ) {
                 navView.visibility = View.VISIBLE
