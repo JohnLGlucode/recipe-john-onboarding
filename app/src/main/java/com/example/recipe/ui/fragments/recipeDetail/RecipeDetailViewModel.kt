@@ -46,15 +46,35 @@ class RecipeDetailViewModel : ViewModel() {
                         metric = "2 Kilogram",
                         imperial = "13 Feet"
                     )
+                ),
+                IngredientsViewData(
+                    aisle = "Snacks & Candy",
+                    image = "candy-floss.jpg",
+                    name = "Candy Floss",
+                    unit = "Kilogram",
+                    MeasuresViewData(
+                        metric = "11 Kilogram",
+                        imperial = "197 Feet"
+                    )
+                ),
+                IngredientsViewData(
+                    aisle = "Condiments",
+                    image = "tomato-sauce.jpg",
+                    name = "Tomato Sauce",
+                    unit = "Mili-liters",
+                    MeasuresViewData(
+                        metric = "500 ML",
+                        imperial = "123 Ounces"
+                    )
                 )
             ),
-            vegetarian = true,
-            vegan = true,
-            glutenFree = true,
-            dairyFree = true,
-            cheap = true,
+            vegetarian = "Yes",
+            vegan = "No",
+            glutenFree = "Yes",
+            dairyFree = "No",
+            cheap = "Yes",
             summary = "this is the summary lol",
-            instructions = "instructions will go here one day",
+            instructions = "instructions will go here one day xx",
             analyzedInstruction = AnalyzedInstructionsViewData(
                 name = "",
                 steps = listOf(
@@ -75,6 +95,12 @@ class RecipeDetailViewModel : ViewModel() {
                         step = "Eat",
                         length = "1 Hours",
                         ingredients = "Bread, Water, Vodka & Tequila"
+                    ),
+                    StepViewData(
+                        number = 420,
+                        step = "Eat a Lot of Junk Food XD",
+                        length = "30 Minutes",
+                        ingredients = "Doritos, Wine Gums, Popcorn, Hotdogs & Wings"
                     )
                 )
             )
@@ -94,11 +120,11 @@ data class RecipeDetailModel(
     val image: Uri,
     val isSaved: Boolean,
     val servings: Int,
-    val vegetarian: Boolean,
-    val vegan: Boolean,
-    val glutenFree: Boolean,
-    val dairyFree: Boolean,
-    val cheap: Boolean,
+    val vegetarian: String,
+    val vegan: String,
+    val glutenFree: String,
+    val dairyFree: String,
+    val cheap: String,
     val ingredients: List<IngredientsViewData>,
     val instructions: String,
     val analyzedInstruction: AnalyzedInstructionsViewData
@@ -127,10 +153,4 @@ data class StepViewData(
     val step: String,
     val ingredients: String,
     val length: String
-)
-
-data class StepIngredientViewData(
-    val id: Int,
-    val name: String,
-    val image: String
 )

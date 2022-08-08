@@ -10,6 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.recipe.R
 import com.example.recipe.databinding.FragmentRecipeDetailBinding
 import com.example.recipe.ui.adapters.ViewPagerAdapter
+import com.example.recipe.ui.fragments.recipeDetail.detailsTabFragment.DetailsTabFragment
+import com.example.recipe.ui.fragments.recipeDetail.ingredientsTabFragment.IngredientsTabFragment
+import com.example.recipe.ui.fragments.recipeDetail.instructionsTabFragment.InstructionsTabFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 class RecipeDetailFragment : Fragment() {
@@ -42,11 +45,6 @@ class RecipeDetailFragment : Fragment() {
         val viewPager = binding.ViewPager2
         val tabLayout = binding.TabLayout
         val pagerAdapter = ViewPagerAdapter(childFragmentManager, lifecycle)
-        viewPager.adapter = pagerAdapter
-
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = tabArray[position]
-        }.attach()
 
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
             Glide.with(binding.root)
@@ -57,6 +55,15 @@ class RecipeDetailFragment : Fragment() {
                 .into(binding.Image)
 
             binding.Name.text = viewData.recipe.name
+
+            pagerAdapter.addFragment(DetailsTabFragment(viewData.recipe))
+            pagerAdapter.addFragment(IngredientsTabFragment(viewData.recipe.ingredients))
+            pagerAdapter.addFragment(InstructionsTabFragment(viewData.recipe))
+            viewPager.adapter = pagerAdapter
+
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.text = tabArray[position]
+            }.attach()
         }
     }
 

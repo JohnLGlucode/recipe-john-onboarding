@@ -5,9 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipe.databinding.FragmentInstructionsTabBinding
+import com.example.recipe.ui.adapters.InstructionAdapter
+import com.example.recipe.ui.fragments.recipeDetail.RecipeDetailModel
 
-class InstructionsTabFragment : Fragment() {
+class InstructionsTabFragment(
+    val recipeDetail: RecipeDetailModel
+) : Fragment() {
 
     private var _binding: FragmentInstructionsTabBinding? = null
     private val binding get() = _binding!!
@@ -26,5 +31,15 @@ class InstructionsTabFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.InstructionsText.text = recipeDetail.instructions
+
+        var recyclerView = binding.InstructionsRV
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.setHasFixedSize(true)
+
+        var adapter = InstructionAdapter(recipeDetail.analyzedInstruction.steps)
+
+        recyclerView.adapter = adapter
     }
 }
