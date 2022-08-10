@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recipe.R
 import com.example.recipe.databinding.ItemIngredientBinding
-import com.example.recipe.ui.fragments.recipeDetail.IngredientsViewData
+import com.example.recipe.ui.viewDataModels.IngredientsViewData
 
 class IngredientAdapter(
     private val ingredients: List<IngredientsViewData>

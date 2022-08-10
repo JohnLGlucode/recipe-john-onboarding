@@ -4,7 +4,8 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.recipe.ui.fragments.saved.RecipeViewData
+import com.example.recipe.ui.viewDataModels.HomeViewData
+import com.example.recipe.ui.viewDataModels.RecipeViewData
 
 class HomeViewModel : ViewModel() {
 
@@ -20,7 +21,3 @@ class HomeViewModel : ViewModel() {
     }
 
 }
-
-data class HomeViewData(
-    val recipe: RecipeViewData
-)

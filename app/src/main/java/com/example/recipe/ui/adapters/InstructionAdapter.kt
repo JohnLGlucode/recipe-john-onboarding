@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipe.databinding.ItemInstructionBinding
-import com.example.recipe.ui.fragments.recipeDetail.StepViewData
+import com.example.recipe.ui.viewDataModels.StepViewData
 
 class InstructionAdapter(
     private val instructions: List<StepViewData>

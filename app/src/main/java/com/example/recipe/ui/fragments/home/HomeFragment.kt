@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.recipe.R
 import com.example.recipe.databinding.FragmentHomeBinding
-import com.example.recipe.ui.fragments.saved.RecipeViewData
+import com.example.recipe.ui.viewDataModels.RecipeViewData
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null

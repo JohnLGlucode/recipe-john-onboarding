@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.recipe.databinding.FragmentDetailsTabBinding
-import com.example.recipe.ui.fragments.recipeDetail.RecipeDetailModel
+import com.example.recipe.ui.viewDataModels.RecipeDetailModel
 
 class DetailsTabFragment(
     val recipeDetail: RecipeDetailModel

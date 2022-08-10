@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recipe.R
 import com.example.recipe.databinding.FragmentSavedBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
+import com.example.recipe.ui.viewDataModels.RecipeViewData
 
 class SavedFragment : Fragment() {
 

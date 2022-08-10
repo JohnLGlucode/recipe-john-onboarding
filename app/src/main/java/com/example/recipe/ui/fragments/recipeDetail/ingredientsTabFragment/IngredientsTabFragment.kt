@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipe.databinding.FragmentIngredientsTabBinding
 import com.example.recipe.ui.adapters.IngredientAdapter
-import com.example.recipe.ui.fragments.recipeDetail.IngredientsViewData
+import com.example.recipe.ui.viewDataModels.IngredientsViewData
 
 class IngredientsTabFragment(
     val ingredients: List<IngredientsViewData>

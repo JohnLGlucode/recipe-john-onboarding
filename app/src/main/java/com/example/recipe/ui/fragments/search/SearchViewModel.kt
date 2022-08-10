@@ -4,7 +4,8 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.recipe.ui.fragments.saved.RecipeViewData
+import com.example.recipe.ui.viewDataModels.RecipeViewData
+import com.example.recipe.ui.viewDataModels.SearchViewData
 
 class SearchViewModel : ViewModel() {
 
@@ -23,7 +24,3 @@ class SearchViewModel : ViewModel() {
     }
 
 }
-
-data class SearchViewData(
-    val searchRecipes: List<RecipeViewData>
-)

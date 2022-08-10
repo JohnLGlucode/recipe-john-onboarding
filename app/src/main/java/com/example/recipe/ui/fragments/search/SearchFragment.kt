@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recipe.R
 import com.example.recipe.databinding.FragmentSearchBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
-import com.example.recipe.ui.fragments.saved.RecipeViewData
+import com.example.recipe.ui.viewDataModels.RecipeViewData
 
 class SearchFragment : Fragment() {
 

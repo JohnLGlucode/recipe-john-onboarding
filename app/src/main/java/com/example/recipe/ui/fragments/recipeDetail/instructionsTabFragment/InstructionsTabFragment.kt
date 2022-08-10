@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipe.databinding.FragmentInstructionsTabBinding
 import com.example.recipe.ui.adapters.InstructionAdapter
-import com.example.recipe.ui.fragments.recipeDetail.RecipeDetailModel
+import com.example.recipe.ui.viewDataModels.RecipeDetailModel
 
 class InstructionsTabFragment(
     val recipeDetail: RecipeDetailModel

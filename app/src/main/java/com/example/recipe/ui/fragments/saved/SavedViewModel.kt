@@ -4,6 +4,8 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.recipe.ui.viewDataModels.RecipeViewData
+import com.example.recipe.ui.viewDataModels.SavedViewData
 
 class SavedViewModel : ViewModel() {
 
@@ -22,14 +24,3 @@ class SavedViewModel : ViewModel() {
     }
 
 }
-
-data class SavedViewData(
-    val searchRecipes: List<RecipeViewData>
-)
-
-data class RecipeViewData(
-    val name: String,
-    val prepTime: String,
-    val image: Uri,
-    val isSaved: Boolean
-)

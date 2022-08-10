@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.recipe.ui.viewDataModels.*
 
 class RecipeDetailViewModel : ViewModel() {
 
@@ -108,49 +109,3 @@ class RecipeDetailViewModel : ViewModel() {
     }
 
 }
-
-data class RecipeDetailViewData(
-    val recipe: RecipeDetailModel
-)
-
-data class RecipeDetailModel(
-    val name: String,
-    val summary: String,
-    val prepTime: String,
-    val image: Uri,
-    val isSaved: Boolean,
-    val servings: Int,
-    val vegetarian: String,
-    val vegan: String,
-    val glutenFree: String,
-    val dairyFree: String,
-    val cheap: String,
-    val ingredients: List<IngredientsViewData>,
-    val instructions: String,
-    val analyzedInstruction: AnalyzedInstructionsViewData
-)
-
-data class IngredientsViewData(
-    val aisle: String,
-    val image: String,
-    val name: String,
-    val unit: String,
-    val measures: MeasuresViewData
-)
-
-data class MeasuresViewData(
-    val metric: String,
-    val imperial: String
-)
-
-data class AnalyzedInstructionsViewData(
-    val name: String,
-    val steps: List<StepViewData>
-)
-
-data class StepViewData(
-    val number: Int,
-    val step: String,
-    val ingredients: String,
-    val length: String
-)
