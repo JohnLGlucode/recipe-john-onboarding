@@ -13,12 +13,6 @@ class Recipe {
     var servings: Int = 0
     @SerializedName("readyInMinutes")
     var readyInMinutes: Int = 0
-    @SerializedName("aggregateLikes")
-    var likes: Int = 0
-    @SerializedName("healthScore")
-    var healthScore: Double = 0.0
-    @SerializedName("pricePerServing")
-    var pricePerServing: Double = 0.0
     @SerializedName("cheap")
     var cheap: Boolean = false
     @SerializedName("glutenFree")
@@ -29,8 +23,12 @@ class Recipe {
     var vegan: Boolean = false
     @SerializedName("vegetarian")
     var vegetarian: Boolean = false
-    @SerializedName("dishTypes")
-    var dishTypes: List<String>? = null
+    @SerializedName("summary")
+    var summary: String? = null
+    @SerializedName("instructions")
+    var instructions: String? = null
     @SerializedName("extendedIngredients")
     var extendedIngredients: List<Ingredient>? = null
+    @SerializedName("analyzedInstructions")
+    var analyzedInstructions: Instructions? = null
 }

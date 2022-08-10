@@ -22,7 +22,6 @@ class RecipeDetailViewModel : ViewModel() {
                     aisle = "Spices & Sauces",
                     image = "salt.jpg",
                     name = "Salt",
-                    unit = "Tonne",
                     MeasuresViewData(
                         metric = "1.5 Tonnes",
                         imperial = "69 Pounds"
@@ -32,7 +31,6 @@ class RecipeDetailViewModel : ViewModel() {
                     aisle = "Baking",
                     image = "sugar.jpg",
                     name = "Sugar",
-                    unit = "Grams",
                     MeasuresViewData(
                         metric = "110.5 Grams",
                         imperial = "9 Stone"
@@ -42,7 +40,6 @@ class RecipeDetailViewModel : ViewModel() {
                     aisle = "Butchery",
                     image = "mince-meat.jpg",
                     name = "Mince Meat",
-                    unit = "Kilogram",
                     MeasuresViewData(
                         metric = "2 Kilogram",
                         imperial = "13 Feet"
@@ -52,7 +49,6 @@ class RecipeDetailViewModel : ViewModel() {
                     aisle = "Snacks & Candy",
                     image = "candy-floss.jpg",
                     name = "Candy Floss",
-                    unit = "Kilogram",
                     MeasuresViewData(
                         metric = "11 Kilogram",
                         imperial = "197 Feet"
@@ -62,7 +58,6 @@ class RecipeDetailViewModel : ViewModel() {
                     aisle = "Condiments",
                     image = "tomato-sauce.jpg",
                     name = "Tomato Sauce",
-                    unit = "Mili-liters",
                     MeasuresViewData(
                         metric = "500 ML",
                         imperial = "123 Ounces"
