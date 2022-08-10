@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.recipe.R
 import com.example.recipe.databinding.ItemIngredientBinding
 import com.example.recipe.ui.viewDataModels.IngredientsViewData
@@ -40,6 +42,7 @@ class IngredientAdapter(
                 .error(R.drawable.ic_baseline_image)
                 .centerCrop()
                 .placeholder(R.drawable.ic_baseline_fastfood)
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(50)))
                 .into(binding.Image)
         }
 

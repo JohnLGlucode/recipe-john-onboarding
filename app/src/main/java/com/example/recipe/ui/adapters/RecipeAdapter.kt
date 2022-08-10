@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.recipe.R
 import com.example.recipe.databinding.ItemRecipeBinding
 import com.example.recipe.ui.viewDataModels.RecipeViewData
 
 class RecipeAdapter(
-    private val recipes: List<RecipeViewData>,
+    private var recipes: List<RecipeViewData>,
     private var onRecipeClicked: ((recipe: RecipeViewData) -> Unit)
 ): RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
 
@@ -26,6 +28,11 @@ class RecipeAdapter(
 
     override fun getItemCount(): Int = recipes.size
 
+    fun updateData(updatedRecipes: List<RecipeViewData>) {
+        recipes = updatedRecipes
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(
         private val binding: ItemRecipeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -39,6 +46,7 @@ class RecipeAdapter(
                 .error(R.drawable.ic_baseline_image)
                 .centerCrop()
                 .placeholder(R.drawable.ic_baseline_fastfood)
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(50)))
                 .into(binding.RecipeImage)
 
             if (recipe.isSaved) {

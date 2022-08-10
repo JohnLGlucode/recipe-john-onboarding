@@ -49,5 +49,3 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 }
-
-// todo

@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.recipe.R
 import com.example.recipe.databinding.FragmentHomeBinding
 import com.example.recipe.ui.viewDataModels.RecipeViewData
@@ -42,6 +44,7 @@ class HomeFragment : Fragment() {
                 .error(R.drawable.ic_baseline_image)
                 .centerCrop()
                 .placeholder(R.drawable.ic_baseline_fastfood)
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(50)))
                 .into(binding.recipeItem.RecipeImage)
 
             binding.root.setOnClickListener {
