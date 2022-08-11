@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipe.R
 import com.example.recipe.databinding.FragmentSearchBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
+import com.example.recipe.ui.dialogs.SearchAdvancedFilterDialog
 import com.example.recipe.ui.viewDataModels.RecipeViewData
 
 class SearchFragment : Fragment() {
@@ -58,9 +59,22 @@ class SearchFragment : Fragment() {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return true
+                when (menuItem.itemId) {
+                    R.id.SearchMenu_Search -> {
+                        return true
+                    }
+                    R.id.SearchMenu_AdvancedFilter -> {
+                        showAdvancedSearchDialog()
+                        return true
+                    }
+                }
+                return false
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun showAdvancedSearchDialog() {
+        SearchAdvancedFilterDialog().show(childFragmentManager, "SearchAdvancedFilterDialog")
     }
 
     private fun createSearchView(menu: Menu) {
