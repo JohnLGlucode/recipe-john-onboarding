@@ -36,17 +36,21 @@ class SavedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = RecipeAdapter(emptyList()) {
-            goToRecipeDetail(it)
-        }
+        configureSavedRecipeList()
+        observeSavedRecipes()
+    }
 
-        var recyclerView: RecyclerView = binding.SavedRecipes
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
-
+    private fun observeSavedRecipes() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
-            adapter.updateData(viewData.searchRecipes)
+            (binding.SavedRecipes.adapter as RecipeAdapter).updateData(viewData.searchRecipes)
+        }
+    }
+
+    private fun configureSavedRecipeList() = with(binding.SavedRecipes) {
+        setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(context)
+        adapter = RecipeAdapter(emptyList()) {
+            goToRecipeDetail(it)
         }
     }
 

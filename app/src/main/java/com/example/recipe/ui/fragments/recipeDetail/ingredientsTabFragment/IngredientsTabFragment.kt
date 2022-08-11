@@ -32,12 +32,12 @@ class IngredientsTabFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var recyclerView = binding.IngredientsRV
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.setHasFixedSize(true)
+        configureIngredientList()
+    }
 
-        var adapter = IngredientAdapter(ingredients)
-
-        recyclerView.adapter = adapter
+    private fun configureIngredientList() = with(binding.IngredientsRV) {
+        setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(context)
+        adapter = IngredientAdapter(ingredients)
     }
 }

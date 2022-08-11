@@ -29,6 +29,10 @@ class DetailsTabFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        displayRecipeDetails()
+    }
+
+    private fun displayRecipeDetails() {
         binding.Summary.text = recipeDetail.summary
         binding.Servings.text = recipeDetail.servings.toString()
         binding.PrepTime.text = recipeDetail.prepTime

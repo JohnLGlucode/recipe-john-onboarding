@@ -33,13 +33,12 @@ class InstructionsTabFragment(
         super.onViewCreated(view, savedInstanceState)
 
         binding.InstructionsText.text = recipeDetail.instructions
+        configureInstructionsList()
+    }
 
-        var recyclerView = binding.InstructionsRV
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.setHasFixedSize(true)
-
-        var adapter = InstructionAdapter(recipeDetail.analyzedInstruction.steps)
-
-        recyclerView.adapter = adapter
+    private fun configureInstructionsList() = with(binding.InstructionsRV) {
+        setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(context)
+        adapter = InstructionAdapter(recipeDetail.analyzedInstruction.steps)
     }
 }

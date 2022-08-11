@@ -35,6 +35,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeRandomRecipe()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun observeRandomRecipe() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
             binding.recipeItem.RecipeTitle.text = viewData.recipe.name
             binding.recipeItem.Time.text = viewData.recipe.prepTime
@@ -51,11 +60,6 @@ class HomeFragment : Fragment() {
                 goToRecipeDetail(viewData.recipe)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun goToRecipeDetail(recipe: RecipeViewData) {

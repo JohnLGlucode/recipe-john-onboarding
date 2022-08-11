@@ -18,8 +18,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 class RecipeDetailFragment : Fragment() {
 
     private var _binding: FragmentRecipeDetailBinding? = null
-    private val binding get() = _binding!! // what does this do?
+    private val binding get() = _binding!!
     private lateinit var viewModel: RecipeDetailViewModel
+    private lateinit var tabArray: List<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,16 +37,17 @@ class RecipeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tabArray = listOf(
-            getString(R.string.title_details),
-            getString(R.string.title_ingredients),
-            getString(R.string.title_instructions)
-        )
+        configureTabs()
+        observeRecipe()
+    }
 
-        val viewPager = binding.ViewPager2
-        val tabLayout = binding.TabLayout
-        val pagerAdapter = ViewPagerAdapter(childFragmentManager, lifecycle)
+    private fun configureTabs() {
+        tabArray = listOf(getString(R.string.title_details), getString(R.string.title_ingredients), getString(R.string.title_instructions))
 
+        binding.ViewPager2.adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
+    }
+
+    private fun observeRecipe() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
             Glide.with(binding.root)
                 .load(viewData.recipe.image)
@@ -56,12 +58,13 @@ class RecipeDetailFragment : Fragment() {
 
             binding.Name.text = viewData.recipe.name
 
+            val pagerAdapter = (binding.ViewPager2.adapter as ViewPagerAdapter)
             pagerAdapter.addFragment(DetailsTabFragment(viewData.recipe))
             pagerAdapter.addFragment(IngredientsTabFragment(viewData.recipe.ingredients))
             pagerAdapter.addFragment(InstructionsTabFragment(viewData.recipe))
-            viewPager.adapter = pagerAdapter
+            binding.ViewPager2.adapter = pagerAdapter
 
-            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            TabLayoutMediator(binding.TabLayout, binding.ViewPager2) { tab, position ->
                 tab.text = tabArray[position]
             }.attach()
         }
