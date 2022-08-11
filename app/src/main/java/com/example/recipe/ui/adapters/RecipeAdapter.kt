@@ -11,7 +11,7 @@ import com.example.recipe.databinding.ItemRecipeBinding
 import com.example.recipe.ui.viewDataModels.RecipeViewData
 
 class RecipeAdapter(
-    private var recipes: List<RecipeViewData>,
+    private var recipes: List<RecipeViewData> = listOf(),
     private var onRecipeClicked: ((recipe: RecipeViewData) -> Unit)
 ): RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
 

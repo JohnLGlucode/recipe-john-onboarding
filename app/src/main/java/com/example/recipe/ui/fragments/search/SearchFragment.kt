@@ -38,30 +38,8 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var adapter = RecipeAdapter(emptyList()) {
-            goToRecipeDetail(it)
-        }
-
-        var recyclerView: RecyclerView = binding.SearchRecipes
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
-
-        viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
-            if (viewData.searchRecipes.isEmpty()) {
-                if (searchQuery.isNullOrEmpty()) {
-                    binding.EmptyListMessage.text = getString(R.string.title_search_recipes)
-                } else {
-                    binding.EmptyListMessage.text = getString(R.string.title_search_recipes_no_results)
-                }
-
-                binding.EmptyListMessage.visibility = View.VISIBLE
-                adapter.updateData(emptyList())
-            } else {
-                adapter.updateData(viewData.searchRecipes)
-                binding.EmptyListMessage.visibility = View.GONE
-            }
-        }
+        configureList()
+        observeSearchResults()
     }
 
     override fun onDestroyView() {
@@ -89,6 +67,32 @@ class SearchFragment : Fragment() {
             }
 
         })
+    }
+
+    private fun configureList() = with(binding.SearchRecipes) {
+        setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(context)
+        adapter = RecipeAdapter {
+            goToRecipeDetail(it)
+        }
+    }
+
+    private fun observeSearchResults() {
+        viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
+            if (viewData.searchRecipes.isEmpty()) {
+                if (searchQuery.isNullOrEmpty()) {
+                    binding.EmptyListMessage.text = getString(R.string.title_search_recipes)
+                } else {
+                    binding.EmptyListMessage.text = getString(R.string.title_search_recipes_no_results)
+                }
+
+                binding.EmptyListMessage.visibility = View.VISIBLE
+                (binding.SearchRecipes.adapter as RecipeAdapter).updateData(listOf())
+            } else {
+                (binding.SearchRecipes.adapter as RecipeAdapter).updateData(viewData.searchRecipes)
+                binding.EmptyListMessage.visibility = View.GONE
+            }
+        }
     }
 
     private fun goToRecipeDetail(recipe: RecipeViewData) {
