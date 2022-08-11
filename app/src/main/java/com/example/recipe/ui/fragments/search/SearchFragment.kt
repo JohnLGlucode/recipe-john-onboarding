@@ -19,6 +19,7 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: SearchViewModel
+    private var searchQuery: String? = null
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -47,7 +48,19 @@ class SearchFragment : Fragment() {
         recyclerView.adapter = adapter
 
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
-            adapter.updateData(viewData.searchRecipes)
+            if (viewData.searchRecipes.isEmpty()) {
+                if (searchQuery.isNullOrEmpty()) {
+                    binding.EmptyListMessage.text = getString(R.string.title_search_recipes)
+                } else {
+                    binding.EmptyListMessage.text = getString(R.string.title_search_recipes_no_results)
+                }
+
+                binding.EmptyListMessage.visibility = View.VISIBLE
+                adapter.updateData(emptyList())
+            } else {
+                adapter.updateData(viewData.searchRecipes)
+                binding.EmptyListMessage.visibility = View.GONE
+            }
         }
     }
 
@@ -67,7 +80,7 @@ class SearchFragment : Fragment() {
         searchView.imeOptions = EditorInfo.IME_ACTION_DONE
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                println("=====> SearchView Query: ${query}")
+                searchQuery = query
                 return true
             }
 

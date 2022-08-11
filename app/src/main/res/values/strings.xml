@@ -20,4 +20,6 @@
     <string name="title_imperial">Imperial</string>
     <string name="title_step">Step</string>
     <string name="title_step_length">Step Length</string>
+    <string name="title_search_recipes_no_results">We could not find any recipes for your search :-(</string>
+    <string name="title_search_recipes">Search for a Recipe…</string>
 </resources>
