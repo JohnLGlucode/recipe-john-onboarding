@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
                 .apply(RequestOptions.bitmapTransform(RoundedCorners(50)))
                 .into(binding.recipeItem.RecipeImage)
 
-            binding.root.setOnClickListener {
+            binding.recipeItem.RecipeItemParent.setOnClickListener {
                 goToRecipeDetail(viewData.recipe)
             }
         }
