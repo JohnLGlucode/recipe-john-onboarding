@@ -9,23 +9,26 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 
-//@Module
-//@InstallIn(ActivityComponent::class)
-//abstract class RecipesModule {
-//    @Binds
-//    abstract fun gateway(impl: RecipeGatewayImpl): RecipeGateway
-//
-//    @Binds
-//    abstract fun getRandomRecipe(impl: GetRandomRecipeImpl): GetRandomRecipe
-//}
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
+abstract class RecipesModule {
+    @Binds
+    abstract fun gateway(impl: RecipeGatewayImpl): RecipeGateway
+
+    @Binds
+    abstract fun getRandomRecipe(impl: GetRandomRecipeImpl): GetRandomRecipe
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
 object ManualRecipesModule {
     @Provides
     @Named("BASE_URL")
@@ -33,19 +36,19 @@ object ManualRecipesModule {
 
     @Provides
     fun retrofit(@Named("BASE_URL") baseUrl: String): Retrofit {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
             .build()
     }
 
     @Provides
-    fun gateway(service: RecipeService): RecipeGateway {
-        return RecipeGatewayImpl(service)
-    }
-
-    @Provides
-    fun getRandomRecipe(gateway: RecipeGateway): GetRandomRecipe {
-        return GetRandomRecipeImpl(gateway)
+    fun recipesService(retrofit: Retrofit): RecipeService {
+        return retrofit.create(RecipeService::class.java)
     }
 }
