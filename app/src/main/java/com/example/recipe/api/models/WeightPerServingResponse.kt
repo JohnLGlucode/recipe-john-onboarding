@@ -1,8 +1,8 @@
-package com.example.recipe.models
+package com.example.recipe.api.models
 
 import com.google.gson.annotations.SerializedName
 
-class WeightPerServing {
+class WeightPerServingResponse {
     @SerializedName("amount")
     val amount: Int = 0
     @SerializedName("unit")

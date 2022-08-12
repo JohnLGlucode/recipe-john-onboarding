@@ -1,8 +1,8 @@
-package com.example.recipe.models
+package com.example.recipe.api.models
 
 import com.google.gson.annotations.SerializedName
 
-class Property {
+class PropertyResponse {
     @SerializedName("name")
     var name: String? = null
     @SerializedName("amount")

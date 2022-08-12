@@ -1,23 +1,31 @@
 package com.example.recipe.ui.fragments.home
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.recipe.ui.viewDataModels.HomeViewData
-import com.example.recipe.ui.viewDataModels.RecipeViewData
+import com.example.recipe.ui.viewDataModels.toViewData
+import com.example.recipe.domain.usecases.GetRandomRecipe
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject internal constructor(
+    private val getRandomRecipe: GetRandomRecipe
+) : ViewModel() {
 
-    val viewData: LiveData<HomeViewData> = MutableLiveData(HomeViewData(mockRecipe))
+    private val _viewData: MutableLiveData<HomeViewData> = MutableLiveData(HomeViewData.loading)
+    val viewData: LiveData<HomeViewData> = _viewData
 
-    private companion object {
-        val mockRecipe: RecipeViewData = RecipeViewData(
-            name = "Recipe 1",
-            prepTime = "1,000 min",
-            image =  Uri.parse("https://spoonacular.com/recipeImages/637876-312x231.jpg"),
-            isSaved = true
-        )
+    init {
+        viewModelScope.launch {
+            val result = getRandomRecipe.invoke()
+            //TODO - Handle error
+            result?.toViewData()?.let {
+                _viewData.value = HomeViewData.success(it)
+            }
+        }
     }
-
 }

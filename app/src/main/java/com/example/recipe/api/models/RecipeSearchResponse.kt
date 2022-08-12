@@ -1,6 +1,5 @@
-package com.example.recipe.retrofit.Responses
+package com.example.recipe.api.models
 
-import com.example.recipe.models.Recipe
 import com.google.gson.annotations.SerializedName
 
 class RecipeSearchResponse {
@@ -11,5 +10,5 @@ class RecipeSearchResponse {
     @SerializedName("totalResults")
     var totalResults: Int = 0
     @SerializedName("results")
-    var recipes: List<Recipe>? = null
+    var recipes: List<RecipeResponse>? = null
 }
