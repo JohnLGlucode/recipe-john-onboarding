@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface RecipeService {
     @GET("/recipes/complexSearch")
-    suspend fun searchRecipes(@Query("apiKey") apiKey: String = "98dd4bfc7ddf4feea2e902eff23e1a43", @Query("query") query: String): Response<RecipeSearchResponse>
+    suspend fun searchRecipes(@Query("apiKey") apiKey: String = "98dd4bfc7ddf4feea2e902eff23e1a43", @Query("query") query: String, @Query("addRecipeInformation") addRecipeInformation: Boolean = true): Response<RecipeSearchResponse>
 
     @GET("/recipes/{id}/information")
     suspend fun getRecipeInformation(@Path("id") id: Int, @Query("apiKey") apiKey: String = "98dd4bfc7ddf4feea2e902eff23e1a43", @Query("includeNutrition") includeNutrition: Boolean): Response<RecipeResponse>

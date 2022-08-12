@@ -7,8 +7,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipe.R
@@ -16,21 +16,22 @@ import com.example.recipe.databinding.FragmentSearchBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
 import com.example.recipe.ui.dialogs.SearchAdvancedFilterDialog
 import com.example.recipe.ui.viewDataModels.RecipeViewData
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: SearchViewModel
     private var searchQuery: String? = null
+
+    private val viewModel: SearchViewModel by viewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
-
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -85,6 +86,7 @@ class SearchFragment : Fragment() {
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchQuery = query
+                searchRecipes()
                 return true
             }
 
@@ -92,6 +94,10 @@ class SearchFragment : Fragment() {
                 return false
             }
         })
+    }
+
+    private fun searchRecipes() {
+        searchQuery?.let { viewModel.searchRecipes(query = it) }
     }
 
     private fun configureList() = with(binding.SearchRecipes) {
@@ -104,19 +110,25 @@ class SearchFragment : Fragment() {
 
     private fun observeSearchResults() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
-            if (viewData.searchRecipes.isEmpty()) {
-                if (searchQuery.isNullOrEmpty()) {
-                    binding.EmptyListMessage.text = getString(R.string.title_search_recipes)
-                } else {
-                    binding.EmptyListMessage.text = getString(R.string.title_search_recipes_no_results)
-                }
+            viewData.searchRecipes ?: return@observe
 
-                binding.EmptyListMessage.visibility = View.VISIBLE
-                (binding.SearchRecipes.adapter as RecipeAdapter).updateData(listOf())
+            displaySearchResults(viewData.searchRecipes)
+        }
+    }
+
+    private fun displaySearchResults(searchRecipes: List<RecipeViewData>) {
+        if (searchRecipes.isEmpty()) {
+            if (searchQuery.isNullOrEmpty()) {
+                binding.EmptyListMessage.text = getString(R.string.title_search_recipes)
             } else {
-                (binding.SearchRecipes.adapter as RecipeAdapter).updateData(viewData.searchRecipes)
-                binding.EmptyListMessage.visibility = View.GONE
+                binding.EmptyListMessage.text = getString(R.string.title_search_recipes_no_results)
             }
+
+            binding.EmptyListMessage.visibility = View.VISIBLE
+            (binding.SearchRecipes.adapter as RecipeAdapter).updateData(listOf())
+        } else {
+            (binding.SearchRecipes.adapter as RecipeAdapter).updateData(searchRecipes)
+            binding.EmptyListMessage.visibility = View.GONE
         }
     }
 

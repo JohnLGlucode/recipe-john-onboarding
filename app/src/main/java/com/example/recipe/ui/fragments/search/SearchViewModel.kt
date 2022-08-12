@@ -1,26 +1,32 @@
 package com.example.recipe.ui.fragments.search
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.recipe.ui.viewDataModels.RecipeViewData
+import androidx.lifecycle.viewModelScope
+import com.example.recipe.domain.usecases.SearchRecipe
 import com.example.recipe.ui.viewDataModels.SearchViewData
+import com.example.recipe.ui.viewDataModels.toViewData
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel : ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject internal constructor(
+    private val searchRecipes: SearchRecipe
+) : ViewModel() {
 
-    val viewData: LiveData<SearchViewData> = MutableLiveData(SearchViewData(mockSearchResults))
+    private val _viewData: MutableLiveData<SearchViewData> = MutableLiveData(SearchViewData.loading)
+    val viewData: LiveData<SearchViewData> = _viewData
 
-    private companion object {
-        val mockSearchResults: List<RecipeViewData> = listOf(
-            RecipeViewData("Chicken Soup", "75 min", Uri.parse("https://spoonacular.com/recipeImages/637976-312x231.jpg"), false),
-            RecipeViewData("Toasted Grass & Olive Oil", "5 min", Uri.parse("https://spoonacular.com/recipeImages/647876-312x231.jpg"), false),
-            RecipeViewData("Rotten Tomato", "50,000 min", Uri.parse("https://spoonacular.com/recipeImages/637276-312x231.jpg"), false),
-            RecipeViewData("Pickled Pizza", "25 min", Uri.parse("https://spoonacular.com/recipeImages/637877-312x231.jpg"), false),
-            RecipeViewData("Avocado on Bread", "1 min", Uri.parse("https://spoonacular.com/recipeImages/667876-312x231.jpg"), false),
-            RecipeViewData("Salted Salt", "0 min", Uri.parse("https://spoonacular.com/recipeImages/638776-312x231.jpg"), false),
-            RecipeViewData("Potato Potaato", "69 min", Uri.parse("https://spoonacular.com/recipeImages/673876-312x231.jpg"), false)
-        )
+    fun searchRecipes(query: String) {
+        viewModelScope.launch {
+            val result = searchRecipes.invoke(query)
+            result?.let { recipes ->
+                _viewData.value = SearchViewData.success(recipes.map {
+                    it.toViewData()
+                })
+            }
+        }
     }
-
 }

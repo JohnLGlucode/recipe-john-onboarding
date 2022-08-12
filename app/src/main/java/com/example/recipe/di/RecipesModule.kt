@@ -5,6 +5,8 @@ import com.example.recipe.api.gateway.RecipeGatewayImpl
 import com.example.recipe.api.retrofit.RecipeService
 import com.example.recipe.domain.usecases.GetRandomRecipe
 import com.example.recipe.domain.usecases.GetRandomRecipeImpl
+import com.example.recipe.domain.usecases.SearchRecipe
+import com.example.recipe.domain.usecases.SearchRecipeImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -16,7 +18,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RecipesModule {
@@ -25,6 +26,9 @@ abstract class RecipesModule {
 
     @Binds
     abstract fun getRandomRecipe(impl: GetRandomRecipeImpl): GetRandomRecipe
+
+    @Binds
+    abstract fun searchRecipes(impl: SearchRecipeImpl): SearchRecipe
 }
 
 @Module

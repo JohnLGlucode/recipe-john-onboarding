@@ -8,6 +8,7 @@ import javax.inject.Inject
 interface RecipeGateway {
     //TODO - Wrap response in generic "NetworkResponse" type
     suspend fun getRandomRecipe(): Recipe?
+    suspend fun searchRecipes(query: String): List<Recipe>?
 }
 
 class RecipeGatewayImpl @Inject internal constructor(
@@ -16,5 +17,12 @@ class RecipeGatewayImpl @Inject internal constructor(
     override suspend fun getRandomRecipe(): Recipe? {
         val response = service.getRandomRecipe(number = 1)
         return response.body()?.randomRecipes?.firstOrNull()?.toRecipe()
+    }
+
+    override suspend fun searchRecipes(query: String): List<Recipe>? {
+        val response = service.searchRecipes(query = query)
+        return response.body()?.recipes?.map {
+            it.toRecipe()
+        }
     }
 }
