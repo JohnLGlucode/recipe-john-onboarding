@@ -1,34 +1,32 @@
 package com.example.recipe.models
 
+import android.net.Uri
+import com.example.recipe.ui.viewDataModels.RecipeViewData
 import com.google.gson.annotations.SerializedName
 
-class Recipe {
-    @SerializedName("id")
-    var id: Int = 0
-    @SerializedName("title")
-    var title: String? = null
+data class Recipe (
+    var id: Int,
+    var title: String,
     @SerializedName("image")
-    var imageUrl: String? = null
-    @SerializedName("servings")
-    var servings: Int = 0
-    @SerializedName("readyInMinutes")
-    var readyInMinutes: Int = 0
-    @SerializedName("cheap")
-    var cheap: Boolean = false
-    @SerializedName("glutenFree")
-    var glutenFree: Boolean = false
-    @SerializedName("dairyFree")
-    var dairyFree: Boolean = false
-    @SerializedName("vegan")
-    var vegan: Boolean = false
-    @SerializedName("vegetarian")
-    var vegetarian: Boolean = false
-    @SerializedName("summary")
-    var summary: String? = null
-    @SerializedName("instructions")
-    var instructions: String? = null
-    @SerializedName("extendedIngredients")
-    var extendedIngredients: List<Ingredient>? = null
-    @SerializedName("analyzedInstructions")
-    var analyzedInstructions: Instructions? = null
+    var imageUrl: String,
+    var servings: Int,
+    var readyInMinutes: Int,
+    var cheap: Boolean,
+    var glutenFree: Boolean,
+    var dairyFree: Boolean,
+    var vegan: Boolean,
+    var vegetarian: Boolean,
+    var summary: String,
+    var instructions: String,
+    var extendedIngredients: List<Ingredient>,
+    var analyzedInstructions: Instructions
+)
+
+fun Recipe.toRecipeViewData(): RecipeViewData {
+    return RecipeViewData(
+        name = title,
+        image = Uri.parse(imageUrl),
+        prepTime = "$readyInMinutes Minutes",
+        isSaved = false
+    )
 }
