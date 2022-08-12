@@ -15,6 +15,6 @@ class RecipeGatewayImpl @Inject internal constructor(
 ): RecipeGateway {
     override suspend fun getRandomRecipe(): Recipe? {
         val response = service.getRandomRecipe(number = 1)
-        return response.randomRecipes?.firstOrNull()?.toRecipe()
+        return response.body()?.randomRecipes?.firstOrNull()?.toRecipe()
     }
 }
