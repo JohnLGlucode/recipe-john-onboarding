@@ -12,7 +12,7 @@ data class RecipeViewData(
 
 fun Recipe.toViewData() = RecipeViewData(
     name = title,
-    prepTime = "Ready $readyInMinutes min",
+    prepTime = "$readyInMinutes min",
     image = Uri.parse(imageUrl),
     isSaved = false //TODO
 )

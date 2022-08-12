@@ -49,20 +49,24 @@ class HomeFragment : Fragment() {
             //TODO - Handle loading state
             viewData.recipe ?: return@observe
 
-            binding.recipeItem.RecipeTitle.text = viewData.recipe.name
-            binding.recipeItem.Time.text = viewData.recipe.prepTime
+            displayRecipe(viewData.recipe)
+        }
+    }
 
-            Glide.with(this)
-                .load(viewData.recipe.image)
-                .error(R.drawable.ic_baseline_image)
-                .centerCrop()
-                .placeholder(R.drawable.ic_baseline_fastfood)
-                .apply(RequestOptions.bitmapTransform(RoundedCorners(50)))
-                .into(binding.recipeItem.RecipeImage)
+    private fun displayRecipe(recipe: RecipeViewData) {
+        binding.recipeItem.RecipeTitle.text = recipe.name
+        binding.recipeItem.Time.text = recipe.prepTime
 
-            binding.recipeItem.RecipeItemParent.setOnClickListener {
-                goToRecipeDetail(viewData.recipe)
-            }
+        Glide.with(this)
+            .load(recipe.image)
+            .error(R.drawable.ic_baseline_image)
+            .fitCenter()
+            .placeholder(R.drawable.ic_baseline_fastfood)
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(50)))
+            .into(binding.recipeItem.RecipeImage)
+
+        binding.recipeItem.RecipeItemParent.setOnClickListener {
+            goToRecipeDetail(recipe)
         }
     }
 

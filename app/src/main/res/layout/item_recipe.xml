@@ -20,15 +20,15 @@
                 android:id="@+id/SaveRecipe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:padding="8dp"
+                android:src="@drawable/ic_bookmark_border_24"
                 android:translationZ="1dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/black"
-                android:src="@drawable/ic_bookmark_border_24" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tint="@color/black" />
 
             <TextView
                 android:id="@+id/RecipeTitle"
@@ -47,19 +47,22 @@
 
             <ImageView
                 android:id="@+id/RecipeImage"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/SaveRecipe"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_launcher_background" />
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/Time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/rounded_textview"
                 android:drawablePadding="5dp"
                 android:gravity="center_vertical"
@@ -67,8 +70,9 @@
                 android:text="1,000 min"
                 android:textColor="@color/white"
                 app:drawableStartCompat="@drawable/ic_time_24"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/RecipeImage"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/SaveRecipe"
                 app:layout_constraintTop_toBottomOf="@+id/RecipeTitle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

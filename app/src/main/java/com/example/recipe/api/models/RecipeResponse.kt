@@ -1,8 +1,6 @@
 package com.example.recipe.api.models
 
-import android.net.Uri
 import com.example.recipe.domain.models.Recipe
-import com.example.recipe.ui.viewDataModels.RecipeViewData
 import com.google.gson.annotations.SerializedName
 
 data class RecipeResponse (
@@ -37,17 +35,3 @@ fun RecipeResponse.toRecipe() = Recipe(
     summary = summary,
     instructions = instructions
 )
-
-fun RecipeResponse.toRecipeViewData(): RecipeViewData {
-
-    val ingredients1 = IngredientResponse("aisle1")
-    val ingredients2 = IngredientResponse("aisle1")
-    (ingredients1 == ingredients2)
-
-    return RecipeViewData(
-        name = title,
-        image = Uri.parse(imageUrl),
-        prepTime = "$readyInMinutes Minutes",
-        isSaved = false
-    )
-}
