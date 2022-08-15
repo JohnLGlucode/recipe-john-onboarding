@@ -1,8 +1,13 @@
 package com.example.recipe.api.models
 
-import com.google.gson.annotations.SerializedName
+import com.example.recipe.domain.models.Instructions
 
-class InstructionsResponse {
-    @SerializedName("steps")
-    val steps: List<InstructionStepResponse>? = null
+data class InstructionsResponse (
+    val steps: List<InstructionStepResponse>
+)
+
+fun InstructionsResponse.toListOfInstructions(): List<Instructions> {
+    return steps.map { step ->
+        step.toInstruction()
+    }
 }

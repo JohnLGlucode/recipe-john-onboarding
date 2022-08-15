@@ -17,8 +17,8 @@ data class RecipeResponse (
     var vegetarian: Boolean?,
     var summary: String?,
     var instructions: String?,
-//    var extendedIngredients: List<IngredientResponse>,
-//    var analyzedInstructions: InstructionsResponse
+    var extendedIngredients: List<IngredientResponse>,
+    var analyzedInstructions: List<InstructionsResponse>
 )
 
 fun RecipeResponse.toRecipe() = Recipe(
@@ -33,5 +33,9 @@ fun RecipeResponse.toRecipe() = Recipe(
     vegan = vegan,
     vegetarian =vegetarian,
     summary = summary,
-    instructions = instructions
+    instructions = instructions,
+    extendedIngredients = extendedIngredients.map { ingredient ->
+        ingredient.toIngredient()
+    },
+    analyzedInstructions = analyzedInstructions[0].toListOfInstructions()
 )

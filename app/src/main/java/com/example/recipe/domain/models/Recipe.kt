@@ -13,6 +13,6 @@ data class Recipe(
     val vegetarian: Boolean?,
     val summary: String?,
     val instructions: String?,
-//    val extendedIngredients: List<Ingredients>,
-//    val analyzedInstructions: List<Instructions>
+    val extendedIngredients: List<Ingredients>,
+    val analyzedInstructions: List<Instructions>
 )

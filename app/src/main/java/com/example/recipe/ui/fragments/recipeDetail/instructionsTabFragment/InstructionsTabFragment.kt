@@ -11,7 +11,7 @@ import com.example.recipe.ui.adapters.InstructionAdapter
 import com.example.recipe.ui.viewDataModels.RecipeDetailModel
 
 class InstructionsTabFragment(
-    val recipeDetail: RecipeDetailModel
+    val recipeDetail: RecipeDetailModel?
 ) : Fragment() {
 
     private var _binding: FragmentInstructionsTabBinding? = null
@@ -32,13 +32,13 @@ class InstructionsTabFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.InstructionsText.text = recipeDetail.instructions
+        binding.InstructionsText.text = recipeDetail?.instructions
         configureInstructionsList()
     }
 
     private fun configureInstructionsList() = with(binding.InstructionsRV) {
         setHasFixedSize(true)
         layoutManager = LinearLayoutManager(context)
-        adapter = InstructionAdapter(recipeDetail.analyzedInstruction.steps)
+        adapter = InstructionAdapter(recipeDetail!!.instructionSteps)
     }
 }

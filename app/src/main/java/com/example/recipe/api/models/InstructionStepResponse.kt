@@ -1,12 +1,19 @@
 package com.example.recipe.api.models
 
-import com.google.gson.annotations.SerializedName
+import com.example.recipe.domain.models.Instructions
 
-class InstructionStepResponse {
-    @SerializedName("number")
-    val number: Int = 0
-    @SerializedName("step")
-    val step: String? = null
-    @SerializedName("ingredients")
-    val ingredients: List<IngredientResponse>? = null
-}
+data class InstructionStepResponse (
+    val number: Int,
+    val step: String,
+    val ingredients: List<IngredientResponse>,
+    val length: LengthResponse?
+)
+
+fun InstructionStepResponse.toInstruction() = Instructions(
+    number = number,
+    step = step,
+    ingredients = ingredients.map { ingredient ->
+        ingredient.toIngredient()
+    },
+    length = length?.toLength()
+)

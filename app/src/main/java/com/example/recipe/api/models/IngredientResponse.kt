@@ -1,20 +1,23 @@
 package com.example.recipe.api.models
 
-import com.google.gson.annotations.SerializedName
+import com.example.recipe.domain.models.Ingredients
 
 data class IngredientResponse(
-    @SerializedName("aisle")
-    val aisle: String? = null,
-    @SerializedName("image")
-    var image: String? = null,
-    @SerializedName("measures")
-    var measures: MeasurementsResponse? = null,
-    @SerializedName("name")
-    var name: String? = null,
-    @SerializedName("amount")
-    var amount: Double = 0.0,
-    @SerializedName("unit")
-    var unit: String? = null,
-    @SerializedName("nutrients")
-    var nutrients: List<NutrientResponse>? = null
+    val aisle: String,
+    var image: String,
+    var measures: MeasurementsResponse,
+    var name: String,
+    var amount: Double,
+    var unit: String,
+    var nutrients: List<NutrientResponse>?
+)
+
+fun IngredientResponse.toIngredient() = Ingredients(
+    aisle = aisle,
+    image = image,
+    name = name,
+    amount = amount,
+    unit = unit,
+    metricMeasurements = measures.let { measures.metric!!.toMeasurement() },
+    imperialMeasurements = measures.let { measures.us!!.toMeasurement() }
 )

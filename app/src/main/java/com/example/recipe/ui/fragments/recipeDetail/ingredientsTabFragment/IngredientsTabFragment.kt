@@ -11,7 +11,7 @@ import com.example.recipe.ui.adapters.IngredientAdapter
 import com.example.recipe.ui.viewDataModels.IngredientsViewData
 
 class IngredientsTabFragment(
-    val ingredients: List<IngredientsViewData>
+    val ingredients: List<IngredientsViewData>?
 ) : Fragment() {
 
     private var _binding: FragmentIngredientsTabBinding? = null
@@ -38,6 +38,6 @@ class IngredientsTabFragment(
     private fun configureIngredientList() = with(binding.IngredientsRV) {
         setHasFixedSize(true)
         layoutManager = LinearLayoutManager(context)
-        adapter = IngredientAdapter(ingredients)
+        adapter = IngredientAdapter(ingredients!!)
     }
 }

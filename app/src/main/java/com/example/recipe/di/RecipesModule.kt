@@ -3,10 +3,7 @@ package com.example.recipe.di
 import com.example.recipe.api.gateway.RecipeGateway
 import com.example.recipe.api.gateway.RecipeGatewayImpl
 import com.example.recipe.api.retrofit.RecipeService
-import com.example.recipe.domain.usecases.GetRandomRecipe
-import com.example.recipe.domain.usecases.GetRandomRecipeImpl
-import com.example.recipe.domain.usecases.SearchRecipe
-import com.example.recipe.domain.usecases.SearchRecipeImpl
+import com.example.recipe.domain.usecases.*
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -29,6 +26,9 @@ abstract class RecipesModule {
 
     @Binds
     abstract fun searchRecipes(impl: SearchRecipeImpl): SearchRecipe
+
+    @Binds
+    abstract fun getRecipeInformation(impl: GetRecipeInformationImpl): GetRecipeInformation
 }
 
 @Module

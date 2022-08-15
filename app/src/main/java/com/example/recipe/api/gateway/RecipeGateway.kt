@@ -9,6 +9,7 @@ interface RecipeGateway {
     //TODO - Wrap response in generic "NetworkResponse" type
     suspend fun getRandomRecipe(): Recipe?
     suspend fun searchRecipes(query: String): List<Recipe>?
+    suspend fun getRecipeInformation(id: Int): Recipe?
 }
 
 class RecipeGatewayImpl @Inject internal constructor(
@@ -24,5 +25,10 @@ class RecipeGatewayImpl @Inject internal constructor(
         return response.body()?.recipes?.map {
             it.toRecipe()
         }
+    }
+
+    override suspend fun getRecipeInformation(id: Int): Recipe? {
+        val response = service.getRecipeInformation(id = id)
+        return response.body()?.toRecipe()
     }
 }

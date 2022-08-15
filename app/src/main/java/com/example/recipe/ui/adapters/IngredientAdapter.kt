@@ -34,8 +34,8 @@ class IngredientAdapter(
         fun bind(ingredient: IngredientsViewData) {
             binding.Name.text = ingredient.name
             binding.Aisle.text = ingredient.aisle
-            binding.MetricValue.text = ingredient.measures.metric
-            binding.ImperialValue.text = ingredient.measures.imperial
+            binding.MetricValue.text = ingredient.metricMeasurement
+            binding.ImperialValue.text = ingredient.imperialMeasurement
 
             Glide.with(binding.root)
                 .load(ingredient.image)

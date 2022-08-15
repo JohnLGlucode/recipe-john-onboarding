@@ -9,7 +9,7 @@ import com.example.recipe.databinding.FragmentDetailsTabBinding
 import com.example.recipe.ui.viewDataModels.RecipeDetailModel
 
 class DetailsTabFragment(
-    val recipeDetail: RecipeDetailModel
+    val recipeDetail: RecipeDetailModel?
 ) : Fragment() {
 
     private var _binding: FragmentDetailsTabBinding? = null
@@ -33,13 +33,13 @@ class DetailsTabFragment(
     }
 
     private fun displayRecipeDetails() {
-        binding.Summary.text = recipeDetail.summary
-        binding.Servings.text = recipeDetail.servings.toString()
-        binding.PrepTime.text = recipeDetail.prepTime
-        binding.Cheap.text = recipeDetail.cheap
-        binding.GlutenFree.text = recipeDetail.glutenFree
-        binding.DairyFree.text = recipeDetail.dairyFree
-        binding.Vegetarian.text = recipeDetail.vegetarian
-        binding.Vegan.text = recipeDetail.vegan
+        binding.Summary.text = recipeDetail?.summary
+        binding.Servings.text = recipeDetail?.servings.toString()
+        binding.PrepTime.text = recipeDetail?.prepTime
+        binding.Cheap.text = recipeDetail?.cheap
+        binding.GlutenFree.text = recipeDetail?.glutenFree
+        binding.DairyFree.text = recipeDetail?.dairyFree
+        binding.Vegetarian.text = recipeDetail?.vegetarian
+        binding.Vegan.text = recipeDetail?.vegan
     }
 }

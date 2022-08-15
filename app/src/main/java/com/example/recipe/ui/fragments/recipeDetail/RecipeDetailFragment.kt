@@ -13,8 +13,11 @@ import com.example.recipe.ui.adapters.ViewPagerAdapter
 import com.example.recipe.ui.fragments.recipeDetail.detailsTabFragment.DetailsTabFragment
 import com.example.recipe.ui.fragments.recipeDetail.ingredientsTabFragment.IngredientsTabFragment
 import com.example.recipe.ui.fragments.recipeDetail.instructionsTabFragment.InstructionsTabFragment
+import com.example.recipe.ui.viewDataModels.RecipeDetailViewData
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecipeDetailFragment : Fragment() {
 
     private var _binding: FragmentRecipeDetailBinding? = null
@@ -49,25 +52,31 @@ class RecipeDetailFragment : Fragment() {
 
     private fun observeRecipe() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
-            Glide.with(binding.root)
-                .load(viewData.recipe.image)
-                .error(R.drawable.ic_baseline_image)
-                .fitCenter()
-                .placeholder(R.drawable.ic_baseline_fastfood)
-                .into(binding.Image)
+            viewData.recipe ?: return@observe
 
-            binding.Name.text = viewData.recipe.name
-
-            val pagerAdapter = (binding.ViewPager2.adapter as ViewPagerAdapter)
-            pagerAdapter.addFragment(DetailsTabFragment(viewData.recipe))
-            pagerAdapter.addFragment(IngredientsTabFragment(viewData.recipe.ingredients))
-            pagerAdapter.addFragment(InstructionsTabFragment(viewData.recipe))
-            binding.ViewPager2.adapter = pagerAdapter
-
-            TabLayoutMediator(binding.TabLayout, binding.ViewPager2) { tab, position ->
-                tab.text = tabArray[position]
-            }.attach()
+            displayRecipeDetails(viewData)
         }
+    }
+
+    private fun displayRecipeDetails(viewData: RecipeDetailViewData) {
+        Glide.with(binding.root)
+            .load(viewData.recipe?.image)
+            .error(R.drawable.ic_baseline_image)
+            .fitCenter()
+            .placeholder(R.drawable.ic_baseline_fastfood)
+            .into(binding.Image)
+
+        binding.Name.text = viewData.recipe?.name
+
+        val pagerAdapter = (binding.ViewPager2.adapter as ViewPagerAdapter)
+        pagerAdapter.addFragment(DetailsTabFragment(viewData.recipe))
+        pagerAdapter.addFragment(IngredientsTabFragment(viewData.recipe?.ingredients))
+        pagerAdapter.addFragment(InstructionsTabFragment(viewData.recipe))
+        binding.ViewPager2.adapter = pagerAdapter
+
+        TabLayoutMediator(binding.TabLayout, binding.ViewPager2) { tab, position ->
+            tab.text = tabArray[position]
+        }.attach()
     }
 
     override fun onDestroyView() {

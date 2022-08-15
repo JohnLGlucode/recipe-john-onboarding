@@ -1,12 +1,15 @@
 package com.example.recipe.api.models
 
-import com.google.gson.annotations.SerializedName
+import com.example.recipe.domain.models.Measurement
 
-class MeasurementResponse {
-    @SerializedName("amount")
-    var amount: Double = 0.0
-    @SerializedName("unitLong")
-    var unitLong: String? = null
-    @SerializedName("unitShort")
-    var unitShort: String? = null
-}
+data class MeasurementResponse (
+    var amount: Double,
+    var unitLong: String,
+    var unitShort: String
+)
+
+fun MeasurementResponse.toMeasurement() = Measurement(
+    amount = amount,
+    unitLong = unitLong,
+    unitShort = unitShort
+)
