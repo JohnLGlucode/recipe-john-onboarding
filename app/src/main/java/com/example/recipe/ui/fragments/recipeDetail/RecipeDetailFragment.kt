@@ -48,7 +48,7 @@ class RecipeDetailFragment : Fragment() {
     }
 
     private fun getRecipeInformation() {
-        viewModel.getRecipeInformation(args.recipe.id)
+        viewModel.getRecipeInformation(args.recipeId)
     }
 
     private fun configureTabs() {

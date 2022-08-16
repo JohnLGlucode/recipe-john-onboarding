@@ -5,19 +5,20 @@ import android.os.Parcelable
 import com.example.recipe.domain.models.Recipe
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class RecipeViewData(
     val id: Int,
     val name: String,
     val prepTime: String,
     val image: Uri,
-    val isSaved: Boolean
-) : Parcelable
+    val isSaved: Boolean,
+    val recipe: Recipe
+)
 
 fun Recipe.toViewData() = RecipeViewData(
     id = id,
     name = title,
     prepTime = "$readyInMinutes min",
     image = Uri.parse(imageUrl),
-    isSaved = false //TODO
+    isSaved = false, //TODO
+    recipe = this
 )

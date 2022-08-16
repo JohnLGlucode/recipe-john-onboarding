@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun goToRecipeDetail(recipe: RecipeViewData) {
-        val action = HomeFragmentDirections.actionNavigationHomeToNavigationRecipeDetail(recipe)
+        val action = HomeFragmentDirections.actionNavigationHomeToNavigationRecipeDetail(recipe.id)
         findNavController().navigate(action)
     }
 

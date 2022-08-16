@@ -133,7 +133,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun goToRecipeDetail(recipe: RecipeViewData) {
-        val action = SearchFragmentDirections.actionNavigationSearchToNavigationRecipeDetail(recipe)
+        val action = SearchFragmentDirections.actionNavigationSearchToNavigationRecipeDetail(recipe.id)
         findNavController().navigate(action)
     }
 

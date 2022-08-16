@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipe.databinding.FragmentSavedBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
 import com.example.recipe.ui.viewDataModels.RecipeViewData
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SavedFragment : Fragment() {
 
     private var _binding: FragmentSavedBinding? = null
@@ -58,7 +60,7 @@ class SavedFragment : Fragment() {
     }
 
     private fun goToRecipeDetail(recipe: RecipeViewData) {
-        val action = SavedFragmentDirections.actionNavigationSavedToNavigationRecipeDetail(recipe)
+        val action = SavedFragmentDirections.actionNavigationSavedToNavigationRecipeDetail(recipe.id)
         findNavController().navigate(action)
     }
 

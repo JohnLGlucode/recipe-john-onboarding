@@ -9,6 +9,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.recipe.core.extensions.hide
+import com.example.recipe.core.extensions.show
+import com.example.recipe.core.extensions.visibleOrGone
 import com.example.recipe.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,13 +31,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
-            if (destination.id == R.id.navigation_home ||
-                destination.id == R.id.navigation_search ||
-                destination.id == R.id.navigation_saved
-            ) {
-                navView.visibility = View.VISIBLE
-            } else {
-                navView.visibility = View.GONE
+            (destination.id == R.id.navigation_home ||
+                    destination.id == R.id.navigation_search ||
+                    destination.id == R.id.navigation_saved).let { showBottomNav ->
+                navView.visibleOrGone(showBottomNav)
             }
         }
 
