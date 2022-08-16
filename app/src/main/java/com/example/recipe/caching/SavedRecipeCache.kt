@@ -1,6 +1,7 @@
 package com.example.recipe.caching
 
 import com.example.recipe.caching.dao.SavedRecipeDao
+import com.example.recipe.caching.models.toRecipe
 import com.example.recipe.caching.models.toStore
 import com.example.recipe.domain.models.Recipe
 import com.example.recipe.domain.usecases.DeleteRecipe

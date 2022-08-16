@@ -11,14 +11,14 @@ data class RecipeStore(
     val title: String,
     val imageUrl: String,
     val readyInMinutes: Int?
-) {
-    fun toRecipe(): Recipe = Recipe(
-        id = id,
-        title = title,
-        imageUrl = imageUrl,
-        readyInMinutes = readyInMinutes
-    )
-}
+)
+
+fun RecipeStore.toRecipe() = Recipe(
+    id = id,
+    title = title,
+    imageUrl = imageUrl,
+    readyInMinutes = readyInMinutes
+)
 
 fun Recipe.toStore(): RecipeStore = RecipeStore(
     id = id,
