@@ -12,6 +12,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipe.R
+import com.example.recipe.core.extensions.hide
+import com.example.recipe.core.extensions.show
 import com.example.recipe.databinding.FragmentSearchBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
 import com.example.recipe.ui.dialogs.SearchAdvancedFilterDialog
@@ -98,6 +100,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun searchRecipes() {
+        showLoadingUI()
         searchQuery?.let { viewModel.searchRecipes(query = it) }
     }
 
@@ -116,10 +119,23 @@ class SearchFragment : Fragment() {
         Snackbar.make(binding.root, getString(R.string.title_recipe_saved), Snackbar.LENGTH_SHORT).show()
     }
 
+    private fun showLoadingUI() {
+        binding.EmptyListMessage.hide()
+        binding.SearchRecipes.hide()
+        binding.ProgressBar.show()
+    }
+
+    private fun hideLoadingUI() {
+        binding.EmptyListMessage.show()
+        binding.SearchRecipes.show()
+        binding.ProgressBar.hide()
+    }
+
     private fun observeSearchResults() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
             viewData.searchRecipes ?: return@observe
 
+            hideLoadingUI()
             displaySearchResults(viewData.searchRecipes)
         }
     }
