@@ -1,7 +1,7 @@
 package com.example.recipe.ui.viewDataModels
 
 import android.net.Uri
-import com.example.recipe.domain.models.Recipe
+import com.example.recipe.domain.models.RecipeInformation
 
 data class RecipeDetailModel(
     val name: String,
@@ -20,52 +20,37 @@ data class RecipeDetailModel(
     val instructionSteps: List<StepViewData>
 )
 
-fun Recipe.toRecipeDetailModel() = RecipeDetailModel(
+fun RecipeInformation.toRecipeDetailModel() = RecipeDetailModel(
     name = title,
-    summary = summary!!,
+    summary = summary,
     prepTime = "$readyInMinutes min",
     image = Uri.parse(imageUrl),
     isSaved = false,
-    servings = servings!!,
+    servings = servings,
     vegetarian = when (vegetarian) {
         true -> "Yes"
         false -> "No"
-        else -> {
-            "No"
-        }
     },
     vegan = when (vegan) {
         true -> "Yes"
         false -> "No"
-        else -> {
-            "No"
-        }
     },
     glutenFree = when (glutenFree) {
         true -> "Yes"
         false -> "No"
-        else -> {
-            "No"
-        }
     },
     dairyFree = when (dairyFree) {
         true -> "Yes"
         false -> "No"
-        else -> {
-            "No"
-        }
     },
     cheap = when (cheap) {
         true -> "Yes"
         false -> "No"
-        else -> {
-            "no"
-        }
     },
     ingredients = extendedIngredients.map { ingredients ->
         ingredients.toViewData()
     },
-    instructions = instructions!!,
+    instructions = instructions,
     instructionSteps = analyzedInstructions.map { instructions ->
         instructions.toStepViewData()
     }

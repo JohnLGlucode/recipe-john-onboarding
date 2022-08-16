@@ -8,34 +8,12 @@ data class RecipeResponse (
     var title: String,
     @SerializedName("image")
     var imageUrl: String,
-    var servings: Int?,
-    var readyInMinutes: Int?,
-    var cheap: Boolean?,
-    var glutenFree: Boolean?,
-    var dairyFree: Boolean?,
-    var vegan: Boolean?,
-    var vegetarian: Boolean?,
-    var summary: String?,
-    var instructions: String?,
-    var extendedIngredients: List<IngredientResponse>,
-    var analyzedInstructions: List<InstructionsResponse>
+    var readyInMinutes: Int?
 )
 
 fun RecipeResponse.toRecipe() = Recipe(
     id = id,
     title = title,
     imageUrl = imageUrl,
-    servings = servings,
-    readyInMinutes = readyInMinutes,
-    cheap = cheap,
-    glutenFree = glutenFree,
-    dairyFree = dairyFree,
-    vegan = vegan,
-    vegetarian =vegetarian,
-    summary = summary,
-    instructions = instructions,
-    extendedIngredients = extendedIngredients.map { ingredient ->
-        ingredient.toIngredient()
-    },
-    analyzedInstructions = analyzedInstructions[0].toListOfInstructions()
+    readyInMinutes = readyInMinutes
 )

@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.recipe.domain.usecases.GetRecipeInformation
 import com.example.recipe.ui.viewDataModels.RecipeDetailViewData
 import com.example.recipe.ui.viewDataModels.toRecipeDetailModel
-import com.example.recipe.ui.viewDataModels.toViewData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
