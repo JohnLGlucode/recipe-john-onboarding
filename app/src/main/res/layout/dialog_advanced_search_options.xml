@@ -16,15 +16,26 @@
 
             <TextView
                 android:id="@+id/Heading"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:text="@string/title_advanced_search_options"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textStyle="bold"
                 android:textColor="@color/purple_500"
-                android:gravity="center_horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/CloseDialog"
+                app:layout_constraintEnd_toStartOf="@+id/CloseDialog"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/CloseDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:src="@drawable/ic_close_24"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

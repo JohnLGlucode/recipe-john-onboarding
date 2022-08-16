@@ -19,6 +19,14 @@ class SearchAdvancedFilterDialog: DialogFragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DialogAdvancedSearchOptionsBinding.inflate(inflater, container, false)
 
+        binding.CloseDialog.setOnClickListener {
+            dismiss()
+        }
+
+        binding.SearchBtn.setOnClickListener {
+            dismiss()
+        }
+
         return binding.root
     }
 }

@@ -23,6 +23,6 @@ data class RecipeStore(
 fun Recipe.toStore(): RecipeStore = RecipeStore(
     id = id,
     title = title,
-    imageUrl = imageUrl,
+    imageUrl = imageUrl!!,
     readyInMinutes = readyInMinutes
 )
