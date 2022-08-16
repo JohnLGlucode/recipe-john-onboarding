@@ -13,13 +13,13 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.recipe.R
 import com.example.recipe.databinding.FragmentHomeBinding
 import com.example.recipe.ui.viewDataModels.RecipeViewData
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
@@ -67,6 +67,14 @@ class HomeFragment : Fragment() {
 
         binding.recipeItem.RecipeItemParent.setOnClickListener {
             goToRecipeDetail(recipe)
+        }
+
+        binding.recipeItem.SaveRecipe.setOnClickListener {
+            viewModel.saveRecipe(recipe)
+
+            Snackbar.make(binding.root, getString(R.string.title_recipe_saved), Snackbar.LENGTH_SHORT).show()
+
+            binding.recipeItem.SaveRecipe.setImageResource(R.drawable.ic_bookmark_24)
         }
     }
 

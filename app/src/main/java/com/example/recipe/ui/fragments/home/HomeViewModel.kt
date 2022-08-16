@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.recipe.ui.viewDataModels.HomeViewData
-import com.example.recipe.ui.viewDataModels.toViewData
 import com.example.recipe.domain.usecases.GetRandomRecipe
 import com.example.recipe.domain.usecases.SaveRecipe
+import com.example.recipe.ui.viewDataModels.HomeViewData
 import com.example.recipe.ui.viewDataModels.RecipeViewData
+import com.example.recipe.ui.viewDataModels.toViewData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,15 +26,16 @@ class HomeViewModel @Inject internal constructor(
         viewModelScope.launch {
             val result = getRandomRecipe.invoke()
 
-            //TODO - Make this user-driven
-            result?.let {
-                saveRecipe.save(it)
-            }
-
             //TODO - Handle error
             result?.toViewData()?.let {
                 _viewData.value = HomeViewData.success(it)
             }
+        }
+    }
+
+    fun saveRecipe(viewData: RecipeViewData) {
+        viewModelScope.launch {
+            saveRecipe.save(viewData.recipe)
         }
     }
 }
