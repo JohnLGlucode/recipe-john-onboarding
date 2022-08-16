@@ -1,6 +1,7 @@
 package com.example.recipe.ui.fragments.recipeDetail.detailsTabFragment
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,7 @@ class DetailsTabFragment(
     }
 
     private fun displayRecipeDetails() {
-        binding.Summary.text = recipeDetail?.summary
+        binding.Summary.text = Html.fromHtml(recipeDetail?.summary)
         binding.Servings.text = recipeDetail?.servings.toString()
         binding.PrepTime.text = recipeDetail?.prepTime
         binding.Cheap.text = recipeDetail?.cheap

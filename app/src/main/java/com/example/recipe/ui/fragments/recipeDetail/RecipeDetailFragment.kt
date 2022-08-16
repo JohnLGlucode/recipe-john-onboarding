@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.recipe.R
 import com.example.recipe.databinding.FragmentRecipeDetailBinding
@@ -24,6 +25,7 @@ class RecipeDetailFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: RecipeDetailViewModel
     private lateinit var tabArray: List<String>
+    private val args: RecipeDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +42,13 @@ class RecipeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getRecipeInformation()
         configureTabs()
         observeRecipe()
+    }
+
+    private fun getRecipeInformation() {
+        viewModel.getRecipeInformation(args.recipe.id)
     }
 
     private fun configureTabs() {

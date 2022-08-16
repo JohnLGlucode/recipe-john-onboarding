@@ -1,6 +1,7 @@
 package com.example.recipe.ui.fragments.recipeDetail.instructionsTabFragment
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +33,7 @@ class InstructionsTabFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.InstructionsText.text = recipeDetail?.instructions
+        binding.InstructionsText.text = Html.fromHtml(recipeDetail?.instructions)
         configureInstructionsList()
     }
 

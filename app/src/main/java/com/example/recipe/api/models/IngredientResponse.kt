@@ -3,9 +3,9 @@ package com.example.recipe.api.models
 import com.example.recipe.domain.models.Ingredients
 
 data class IngredientResponse(
-    val aisle: String,
+    val aisle: String?,
     var image: String,
-    var measures: MeasurementsResponse,
+    var measures: MeasurementsResponse?,
     var name: String,
     var amount: Double,
     var unit: String,
@@ -18,6 +18,6 @@ fun IngredientResponse.toIngredient() = Ingredients(
     name = name,
     amount = amount,
     unit = unit,
-    metricMeasurements = measures.let { measures.metric!!.toMeasurement() },
-    imperialMeasurements = measures.let { measures.us!!.toMeasurement() }
+    metricMeasurements = measures?.let { measures?.metric!!.toMeasurement() },
+    imperialMeasurements = measures?.let { measures?.us!!.toMeasurement() }
 )

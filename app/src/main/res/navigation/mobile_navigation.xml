@@ -45,6 +45,10 @@
         android:id="@+id/navigation_recipe_detail"
         android:name="com.example.recipe.ui.fragments.recipeDetail.RecipeDetailFragment"
         android:label="@string/title_recipe_details"
-        tools:layout="@layout/fragment_recipe_detail" />
+        tools:layout="@layout/fragment_recipe_detail" >
+        <argument
+            android:name="recipe"
+            app:argType="com.example.recipe.ui.viewDataModels.RecipeViewData" />
+    </fragment>
 
 </navigation>

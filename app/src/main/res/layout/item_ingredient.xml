@@ -25,6 +25,7 @@
             android:id="@+id/Name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="name of ingredient"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="aisle"
+            android:layout_marginStart="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Image"
@@ -46,6 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/title_metric"
+            android:layout_marginStart="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintStart_toEndOf="@+id/Image"
             app:layout_constraintTop_toBottomOf="@+id/Aisle" />
@@ -66,6 +69,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/title_imperial"
+            android:layout_marginStart="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintStart_toEndOf="@+id/Image"
             app:layout_constraintTop_toBottomOf="@+id/MetricTitle" />
