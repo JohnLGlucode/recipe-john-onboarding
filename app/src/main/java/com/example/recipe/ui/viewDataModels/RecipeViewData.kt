@@ -4,6 +4,7 @@ import android.net.Uri
 import com.example.recipe.domain.models.Recipe
 
 data class RecipeViewData(
+    val id: Int,
     val name: String,
     val prepTime: String,
     val image: Uri,
@@ -11,6 +12,7 @@ data class RecipeViewData(
 )
 
 fun Recipe.toViewData() = RecipeViewData(
+    id = id,
     name = title,
     prepTime = "$readyInMinutes min",
     image = Uri.parse(imageUrl),
