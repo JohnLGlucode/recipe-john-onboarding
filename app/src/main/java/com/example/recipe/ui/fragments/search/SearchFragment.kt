@@ -16,6 +16,7 @@ import com.example.recipe.databinding.FragmentSearchBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
 import com.example.recipe.ui.dialogs.SearchAdvancedFilterDialog
 import com.example.recipe.ui.viewDataModels.RecipeViewData
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -103,9 +104,16 @@ class SearchFragment : Fragment() {
     private fun configureList() = with(binding.SearchRecipes) {
         setHasFixedSize(true)
         layoutManager = LinearLayoutManager(context)
-        adapter = RecipeAdapter {
-            goToRecipeDetail(it)
-        }
+        adapter = RecipeAdapter(
+            onRecipeClicked = { goToRecipeDetail(it) },
+            saveRecipe = { saveRecipe(it) }
+        )
+    }
+
+    private fun saveRecipe(viewData: RecipeViewData) {
+        viewModel.save(viewData)
+
+        Snackbar.make(binding.root, getString(R.string.title_recipe_saved), Snackbar.LENGTH_SHORT).show()
     }
 
     private fun observeSearchResults() {

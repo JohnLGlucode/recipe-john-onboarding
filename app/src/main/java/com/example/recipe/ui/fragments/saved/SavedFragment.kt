@@ -8,9 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recipe.R
 import com.example.recipe.databinding.FragmentSavedBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
 import com.example.recipe.ui.viewDataModels.RecipeViewData
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,9 +51,17 @@ class SavedFragment : Fragment() {
     private fun configureSavedRecipeList() = with(binding.SavedRecipes) {
         setHasFixedSize(true)
         layoutManager = LinearLayoutManager(context)
-        adapter = RecipeAdapter(emptyList()) {
-            goToRecipeDetail(it)
-        }
+        adapter = RecipeAdapter(
+            recipes = emptyList(),
+            onRecipeClicked = { goToRecipeDetail(it) },
+            saveRecipe = { deleteSavedRecipe(it) }
+        )
+    }
+
+    private fun deleteSavedRecipe(viewData: RecipeViewData) {
+        viewModel.deleteSavedRecipe(viewData)
+
+        Snackbar.make(binding.root, getString(R.string.title_recipe_removed_from_saved_recipes), Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
