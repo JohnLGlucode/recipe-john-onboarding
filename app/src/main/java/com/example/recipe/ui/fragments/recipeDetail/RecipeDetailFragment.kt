@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.recipe.R
+import com.example.recipe.core.extensions.hide
+import com.example.recipe.core.extensions.show
 import com.example.recipe.databinding.FragmentRecipeDetailBinding
 import com.example.recipe.ui.adapters.ViewPagerAdapter
 import com.example.recipe.ui.fragments.recipeDetail.detailsTabFragment.DetailsTabFragment
@@ -57,10 +59,31 @@ class RecipeDetailFragment : Fragment() {
         binding.ViewPager2.adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
     }
 
+    private fun showLoadingUI() {
+        binding.ProgressBar.show()
+        binding.Name.hide()
+        binding.ViewPager2.hide()
+        binding.Image.hide()
+        binding.TabLayout.hide()
+    }
+
+    private fun hideLoadingUI() {
+        binding.ProgressBar.hide()
+        binding.Name.show()
+        binding.ViewPager2.show()
+        binding.Image.show()
+        binding.TabLayout.show()
+    }
+
     private fun observeRecipe() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
-            viewData.recipe ?: return@observe
+            if (viewData.isLoading) {
+                showLoadingUI()
+            } else {
+                hideLoadingUI()
+            }
 
+            viewData.recipe ?: return@observe
             displayRecipeDetails(viewData)
         }
     }
