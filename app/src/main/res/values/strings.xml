@@ -48,6 +48,7 @@
     <string name="title_recipe_saved">Recipe Saved!</string>
     <string name="title_recipe_removed_from_saved_recipes">Removed Recipe from Saved Recipes!</string>
     <string name="title_save">Save</string>
+    <string name="title_no_saved_recipes">You have no saved Recipes!</string>
 
     <string-array name="cuisine_types">
         <item>@string/title_please_select</item>

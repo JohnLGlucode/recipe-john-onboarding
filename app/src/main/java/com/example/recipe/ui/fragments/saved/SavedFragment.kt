@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipe.R
+import com.example.recipe.core.extensions.visibleOrGone
 import com.example.recipe.databinding.FragmentSavedBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
 import com.example.recipe.ui.viewDataModels.RecipeViewData
@@ -44,8 +45,15 @@ class SavedFragment : Fragment() {
 
     private fun observeSavedRecipes() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
+            toggleSavedRecipesMessage(viewData.searchRecipes.isEmpty())
+
             (binding.SavedRecipes.adapter as RecipeAdapter).updateData(viewData.searchRecipes)
         }
+    }
+
+    private fun toggleSavedRecipesMessage(isEmpty: Boolean) {
+        binding.SavedRecipes.visibleOrGone(!isEmpty)
+        binding.EmptyListMessage.visibleOrGone(isEmpty)
     }
 
     private fun configureSavedRecipeList() = with(binding.SavedRecipes) {
