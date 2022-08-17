@@ -17,7 +17,7 @@ class GetRandomRecipeImpl @Inject internal constructor(
     private val gateway: RecipeGateway,
     savedRecipesProvider: SavedRecipesProvider
 ): GetRandomRecipe {
-    private val _randomRecipe: MutableStateFlow<Recipe?> = MutableStateFlow(Recipe(
+    private val _randomRecipe: MutableStateFlow<Recipe> = MutableStateFlow(Recipe(
         id = 0,
         title = "Loading...",
         imageUrl = "",
@@ -27,12 +27,12 @@ class GetRandomRecipeImpl @Inject internal constructor(
 
     override val randomRecipe: Flow<Recipe> = combine(_randomRecipe, savedRecipesProvider.savedRecipes) { randomRecipe, savedRecipes ->
         randomRecipe.let { random ->
-            val isSaved = savedRecipes.firstOrNull { random!!.id == it.id } != null
-            random!!.copy(isSaved = isSaved)
+            val isSaved = savedRecipes.firstOrNull { random.id == it.id } != null
+            random.copy(isSaved = isSaved)
         }
     }
 
     override suspend fun invoke() {
-        _randomRecipe.value = gateway.getRandomRecipe()
+        _randomRecipe.value = gateway.getRandomRecipe()!!
     }
 }
