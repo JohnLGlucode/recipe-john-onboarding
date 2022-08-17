@@ -11,8 +11,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.recipe.R
-import com.example.recipe.core.extensions.hide
-import com.example.recipe.core.extensions.show
 import com.example.recipe.core.extensions.visibleOrGone
 import com.example.recipe.databinding.FragmentHomeBinding
 import com.example.recipe.ui.viewDataModels.RecipeViewData
@@ -74,16 +72,24 @@ class HomeFragment : Fragment() {
             .apply(RequestOptions.bitmapTransform(RoundedCorners(50)))
             .into(binding.recipeItem.RecipeImage)
 
+        if (recipe.isSaved) {
+            binding.recipeItem.SaveRecipe.setImageResource(R.drawable.ic_bookmark_24)
+        } else {
+            binding.recipeItem.SaveRecipe.setImageResource(R.drawable.ic_bookmark_border_24)
+        }
+
         binding.recipeItem.RecipeItemParent.setOnClickListener {
             goToRecipeDetail(recipe)
         }
 
         binding.recipeItem.SaveRecipe.setOnClickListener {
-            viewModel.saveRecipe(recipe)
+            viewModel.saveOrDeleteRecipe(recipe)
 
-            Snackbar.make(binding.root, getString(R.string.title_recipe_saved), Snackbar.LENGTH_SHORT).show()
-
-            binding.recipeItem.SaveRecipe.setImageResource(R.drawable.ic_bookmark_24)
+            if (recipe.isSaved) {
+                Snackbar.make(binding.root, getString(R.string.title_recipe_removed_from_saved_recipes), Snackbar.LENGTH_SHORT).setAnchorView(R.id.nav_view).show()
+            } else {
+                Snackbar.make(binding.root, getString(R.string.title_recipe_saved), Snackbar.LENGTH_SHORT).setAnchorView(R.id.nav_view).show()
+            }
         }
     }
 

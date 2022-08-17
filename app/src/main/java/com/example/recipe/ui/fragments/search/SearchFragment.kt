@@ -116,7 +116,11 @@ class SearchFragment : Fragment() {
     private fun saveClicked(viewData: RecipeViewData) {
         viewModel.saveOrDelete(viewData)
 
-        Snackbar.make(binding.root, getString(R.string.title_recipe_saved), Snackbar.LENGTH_SHORT).show()
+        if (viewData.recipe.isSaved) {
+            Snackbar.make(binding.root, getString(R.string.title_recipe_removed_from_saved_recipes), Snackbar.LENGTH_SHORT).setAnchorView(R.id.nav_view).show()
+        } else {
+            Snackbar.make(binding.root, getString(R.string.title_recipe_saved), Snackbar.LENGTH_SHORT).setAnchorView(R.id.nav_view).show()
+        }
     }
 
     private fun showLoadingUI() {

@@ -69,7 +69,7 @@ class SavedFragment : Fragment() {
     private fun deleteSavedRecipe(viewData: RecipeViewData) {
         viewModel.deleteSavedRecipe(viewData)
 
-        Snackbar.make(binding.root, getString(R.string.title_recipe_removed_from_saved_recipes), Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(binding.root, getString(R.string.title_recipe_removed_from_saved_recipes), Snackbar.LENGTH_SHORT).setAnchorView(R.id.nav_view).show()
     }
 
     override fun onDestroyView() {
