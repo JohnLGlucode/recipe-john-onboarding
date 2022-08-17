@@ -47,6 +47,7 @@
     <string name="title_random_recipe_for_you">Random recipe for you!</string>
     <string name="title_recipe_saved">Recipe Saved!</string>
     <string name="title_recipe_removed_from_saved_recipes">Removed Recipe from Saved Recipes!</string>
+    <string name="title_save">Save</string>
 
     <string-array name="cuisine_types">
         <item>@string/title_please_select</item>

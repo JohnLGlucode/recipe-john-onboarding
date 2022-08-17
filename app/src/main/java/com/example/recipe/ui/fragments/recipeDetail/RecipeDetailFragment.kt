@@ -1,10 +1,11 @@
 package com.example.recipe.ui.fragments.recipeDetail
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -45,8 +46,34 @@ class RecipeDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getRecipeInformation()
+        configureMenu()
         configureTabs()
         observeRecipe()
+    }
+
+    private fun configureMenu() {
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object: MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.recipe_detail_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    R.id.RecipeDetailMenu_Save -> {
+                        recipeSaveDelete()
+                        return true
+                    }
+                }
+                return false
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun recipeSaveDelete() {
+
     }
 
     private fun getRecipeInformation() {
