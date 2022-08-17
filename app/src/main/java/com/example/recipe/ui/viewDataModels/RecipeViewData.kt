@@ -14,21 +14,11 @@ data class RecipeViewData(
     val recipe: Recipe
 )
 
-fun Recipe.toViewData(isCached: Boolean = false) = RecipeViewData(
+fun Recipe.toViewData() = RecipeViewData(
     id = id,
     name = title,
     prepTime = "$readyInMinutes min",
     image = Uri.parse(imageUrl),
-    isSaved = when (isCached) {
-        true -> true
-        false -> false
-    },
+    isSaved = isSaved,
     recipe = this
-)
-
-fun RecipeViewData.toRecipe() = Recipe(
-    id = id,
-    title = name,
-    readyInMinutes = 0,
-    imageUrl = image.toString()
 )

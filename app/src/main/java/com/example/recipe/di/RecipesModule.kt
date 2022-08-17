@@ -25,24 +25,31 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class RecipesModule {
     @Binds
+    @Singleton
     abstract fun gateway(impl: RecipeGatewayImpl): RecipeGateway
 
     @Binds
+    @Singleton
     abstract fun getRandomRecipe(impl: GetRandomRecipeImpl): GetRandomRecipe
 
     @Binds
+    @Singleton
     abstract fun searchRecipes(impl: SearchRecipeImpl): SearchRecipe
 
     @Binds
+    @Singleton
     abstract fun getRecipeInformation(impl: GetRecipeInformationImpl): GetRecipeInformation
 
     @Binds
+    @Singleton
     abstract fun savedRecipesProvider(impl: SavedRecipeCacheImpl): SavedRecipesProvider
 
     @Binds
+    @Singleton
     abstract fun saveRecipe(impl: SavedRecipeCacheImpl): SaveRecipe
 
     @Binds
+    @Singleton
     abstract fun deleteRecipe(impl: SavedRecipeCacheImpl): DeleteRecipe
 }
 
@@ -50,10 +57,12 @@ abstract class RecipesModule {
 @InstallIn(SingletonComponent::class)
 object ManualRecipesModule {
     @Provides
+    @Singleton
     @Named("BASE_URL")
     fun baseUrl(): String = "https://api.spoonacular.com"
 
     @Provides
+    @Singleton
     fun retrofit(@Named("BASE_URL") baseUrl: String): Retrofit {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -67,13 +76,16 @@ object ManualRecipesModule {
     }
 
     @Provides
+    @Singleton
     fun recipesService(retrofit: Retrofit): RecipeService {
         return retrofit.create(RecipeService::class.java)
     }
 
     @Provides
+    @Singleton
     fun database(@ApplicationContext context: Context): RecipeDB = RecipeDB.build(context)
 
     @Provides
+    @Singleton
     fun savedRecipeDao(db: RecipeDB): SavedRecipeDao = db.savedRecipeDao()
 }

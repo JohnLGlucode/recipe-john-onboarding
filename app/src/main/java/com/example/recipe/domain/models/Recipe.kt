@@ -4,5 +4,6 @@ data class Recipe(
     val id: Int,
     val title: String,
     val imageUrl: String?,
-    val readyInMinutes: Int?
+    val readyInMinutes: Int?,
+    val isSaved: Boolean
 )

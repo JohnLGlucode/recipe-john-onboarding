@@ -109,12 +109,12 @@ class SearchFragment : Fragment() {
         layoutManager = LinearLayoutManager(context)
         adapter = RecipeAdapter(
             onRecipeClicked = { goToRecipeDetail(it) },
-            saveRecipe = { saveRecipe(it) }
+            saveClicked = { saveClicked(it) }
         )
     }
 
-    private fun saveRecipe(viewData: RecipeViewData) {
-        viewModel.save(viewData)
+    private fun saveClicked(viewData: RecipeViewData) {
+        viewModel.saveOrDelete(viewData)
 
         Snackbar.make(binding.root, getString(R.string.title_recipe_saved), Snackbar.LENGTH_SHORT).show()
     }

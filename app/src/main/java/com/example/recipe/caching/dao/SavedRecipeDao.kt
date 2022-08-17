@@ -9,10 +9,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SavedRecipeDao {
-    @Query("SELECT * FROM saved_recipes_table ORDER BY id")
-    fun getSavedRecipes(): Flow<List<RecipeStore>>
+    val savedRecipes: Flow<List<RecipeStore>>
+        @Query("SELECT * FROM saved_recipes_table ORDER BY id")
+        get
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(recipe: RecipeStore)
 
     @Query("DELETE FROM saved_recipes_table WHERE id = :id;")

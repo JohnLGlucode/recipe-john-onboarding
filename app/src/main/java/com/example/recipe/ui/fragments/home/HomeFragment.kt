@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.recipe.R
 import com.example.recipe.core.extensions.hide
 import com.example.recipe.core.extensions.show
+import com.example.recipe.core.extensions.visibleOrGone
 import com.example.recipe.databinding.FragmentHomeBinding
 import com.example.recipe.ui.viewDataModels.RecipeViewData
 import com.google.android.material.snackbar.Snackbar
@@ -48,28 +49,17 @@ class HomeFragment : Fragment() {
 
     private fun observeRandomRecipe() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
-            if (viewData.isLoading) {
-                showProgressLoading()
-            }
-            else {
-                hideProgressLoading()
-            }
+            toggleProgressLoading(viewData.isLoading)
 
             viewData.recipe ?: return@observe
             displayRecipe(viewData.recipe)
         }
     }
 
-    private fun hideProgressLoading() {
-        binding.recipeItem.root.show()
-        binding.RandomRecipeMessage.show()
-        binding.ProgressBar.hide()
-    }
-
-    private fun showProgressLoading() {
-        binding.recipeItem.root.hide()
-        binding.RandomRecipeMessage.hide()
-        binding.ProgressBar.show()
+    private fun toggleProgressLoading(isLoading: Boolean) {
+        binding.recipeItem.root.visibleOrGone(!isLoading)
+        binding.RandomRecipeMessage.visibleOrGone(!isLoading)
+        binding.ProgressBar.visibleOrGone(isLoading)
     }
 
     private fun displayRecipe(recipe: RecipeViewData) {

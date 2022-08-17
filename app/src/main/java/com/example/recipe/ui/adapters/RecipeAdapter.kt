@@ -13,7 +13,7 @@ import com.example.recipe.ui.viewDataModels.RecipeViewData
 class RecipeAdapter(
     private var recipes: List<RecipeViewData> = listOf(),
     private val onRecipeClicked: ((recipe: RecipeViewData) -> Unit),
-    private val saveRecipe: ((recipe: RecipeViewData) -> Unit)
+    private val saveClicked: ((recipe: RecipeViewData) -> Unit)
 ): RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
 
     lateinit var binding: ItemRecipeBinding
@@ -59,13 +59,7 @@ class RecipeAdapter(
             binding.root.setOnClickListener { onRecipeClicked(recipe) }
 
             binding.SaveRecipe.setOnClickListener {
-                saveRecipe(recipe)
-
-                if (recipe.isSaved) {
-                    binding.SaveRecipe.setImageResource(R.drawable.ic_bookmark_border_24)
-                } else {
-                    binding.SaveRecipe.setImageResource(R.drawable.ic_bookmark_24)
-                }
+                saveClicked(recipe)
             }
         }
 

@@ -17,7 +17,8 @@ fun RecipeStore.toRecipe() = Recipe(
     id = id,
     title = title,
     imageUrl = imageUrl,
-    readyInMinutes = readyInMinutes
+    readyInMinutes = readyInMinutes,
+    isSaved = true
 )
 
 fun Recipe.toStore(): RecipeStore = RecipeStore(

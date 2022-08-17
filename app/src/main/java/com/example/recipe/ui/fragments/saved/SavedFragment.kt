@@ -54,7 +54,7 @@ class SavedFragment : Fragment() {
         adapter = RecipeAdapter(
             recipes = emptyList(),
             onRecipeClicked = { goToRecipeDetail(it) },
-            saveRecipe = { deleteSavedRecipe(it) }
+            saveClicked = { deleteSavedRecipe(it) }
         )
     }
 

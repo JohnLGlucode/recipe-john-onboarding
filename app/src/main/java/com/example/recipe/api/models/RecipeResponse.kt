@@ -15,5 +15,6 @@ fun RecipeResponse.toRecipe() = Recipe(
     id = id,
     title = title,
     imageUrl = imageUrl,
-    readyInMinutes = readyInMinutes
+    readyInMinutes = readyInMinutes,
+    isSaved = false
 )

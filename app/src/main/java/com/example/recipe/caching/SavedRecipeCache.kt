@@ -16,7 +16,7 @@ interface SavedRecipeCache: SavedRecipesProvider, SaveRecipe, DeleteRecipe
 class SavedRecipeCacheImpl @Inject internal constructor(
     private val dao: SavedRecipeDao
 ): SavedRecipeCache {
-    override val savedRecipes: Flow<List<Recipe>> = dao.getSavedRecipes().map { stores ->
+    override val savedRecipes: Flow<List<Recipe>> = dao.savedRecipes.map { stores ->
         stores.map { it.toRecipe() }
     }
 
