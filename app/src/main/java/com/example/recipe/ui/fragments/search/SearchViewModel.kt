@@ -9,6 +9,7 @@ import com.example.recipe.domain.usecases.DeleteRecipe
 import com.example.recipe.domain.usecases.SaveRecipe
 import com.example.recipe.domain.usecases.SearchRecipe
 import com.example.recipe.ui.viewDataModels.RecipeViewData
+import com.example.recipe.ui.viewDataModels.SearchAdvancedFilterDialogViewData
 import com.example.recipe.ui.viewDataModels.SearchViewData
 import com.example.recipe.ui.viewDataModels.toViewData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +28,9 @@ class SearchViewModel @Inject internal constructor(
 
     private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     private val _searchResults: Flow<List<Recipe>> = searchRecipes.result
+    private val _advancedFilter: MutableStateFlow<SearchAdvancedFilterDialogViewData> = MutableStateFlow(defaultAdvancedFilter())
 
+    val filterViewData: LiveData<SearchAdvancedFilterDialogViewData> = _advancedFilter.asLiveData()
     val viewData: LiveData<SearchViewData> = combine(_isLoading, _searchResults) { isLoading, searchResults ->
         SearchViewData(searchResults.map { it.toViewData() }, isLoading)
     }.asLiveData()
@@ -45,4 +48,37 @@ class SearchViewModel @Inject internal constructor(
             saveRecipe.save(viewData.recipe)
         }
     }
+
+    private fun defaultAdvancedFilter(): SearchAdvancedFilterDialogViewData = SearchAdvancedFilterDialogViewData(
+        cuisine = null,
+        diet = null,
+        intolerances = null,
+        mealType = null,
+        maxReadyTime = null,
+        minCaffeine = null,
+        maxCaffeine = null,
+        minCalcium = null,
+        maxCalcium = null,
+        minCarbs = null,
+        maxCarbs = null,
+        minCholesterol = null,
+        maxCholesterol = null,
+        minFat = null,
+        maxFat = null,
+        minFiber = null,
+        maxFiber = null,
+        minIron = null,
+        maxIron = null,
+        minProtein = null,
+        maxProtein = null,
+        minSatFat = null,
+        maxSatFat = null,
+        minSodium = null,
+        maxSodium = null,
+        minSugar = null,
+        maxSugar = null,
+        minZinc = null,
+        maxZinc = null
+    )
+
 }

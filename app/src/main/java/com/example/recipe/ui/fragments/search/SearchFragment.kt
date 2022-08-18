@@ -16,7 +16,7 @@ import com.example.recipe.core.extensions.hide
 import com.example.recipe.core.extensions.show
 import com.example.recipe.databinding.FragmentSearchBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
-import com.example.recipe.ui.dialogs.SearchAdvancedFilterDialog
+import com.example.recipe.ui.dialogs.searchAdvancedFilter.SearchAdvancedFilterDialog
 import com.example.recipe.ui.viewDataModels.RecipeViewData
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
