@@ -31,6 +31,7 @@ class RecipeDetailFragment : Fragment() {
     private lateinit var saveRecipeMenuItem: MenuItem
     private lateinit var deleteRecipeMenuItem: MenuItem
     private lateinit var menuHost: MenuHost
+    private var isSaved: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,9 +62,13 @@ class RecipeDetailFragment : Fragment() {
 
                 saveRecipeMenuItem = menu.findItem(R.id.RecipeDetailMenu_Save)
                 deleteRecipeMenuItem = menu.findItem(R.id.RecipeDetailMenu_Delete)
+            }
 
-//                saveRecipeMenuItem.isVisible = false
-//                deleteRecipeMenuItem.isVisible = false
+            override fun onPrepareMenu(menu: Menu) {
+                super.onPrepareMenu(menu)
+
+                saveRecipeMenuItem.isVisible = !isSaved
+                deleteRecipeMenuItem.isVisible = isSaved
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -136,14 +141,11 @@ class RecipeDetailFragment : Fragment() {
             tab.text = tabArray[position]
         }.attach()
 
-        val isSaved = if (viewData.recipe != null) {
+        isSaved = if (viewData.recipe != null) {
             viewData.recipe.isSaved
         } else {
             false
         }
-
-        saveRecipeMenuItem.isVisible = !isSaved
-        deleteRecipeMenuItem.isVisible = isSaved
 
         menuHost.invalidateMenu()
     }
