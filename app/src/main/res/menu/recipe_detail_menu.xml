@@ -8,4 +8,10 @@
         android:title="@string/title_save"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/RecipeDetailMenu_Delete"
+        android:icon="@drawable/ic_bookmark_24_white"
+        android:title="@string/title_save"
+        app:showAsAction="ifRoom" />
+
 </menu>

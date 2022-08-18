@@ -28,7 +28,9 @@ class RecipeDetailFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: RecipeDetailViewModel
     private val args: RecipeDetailFragmentArgs by navArgs()
-    //private lateinit var saveDeleteRecipeMenuItem: MenuItem
+    private lateinit var saveRecipeMenuItem: MenuItem
+    private lateinit var deleteRecipeMenuItem: MenuItem
+    private lateinit var menuHost: MenuHost
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,29 +47,33 @@ class RecipeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getRecipeInformation()
         configureMenu()
+        getRecipeInformation()
         observeRecipe()
     }
 
     private fun configureMenu() {
-        val menuHost: MenuHost = requireActivity()
+        menuHost = requireActivity()
 
         menuHost.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.recipe_detail_menu, menu)
 
-                //saveDeleteRecipeMenuItem = menu.findItem(R.id.RecipeDetailMenu_Save)
-            }
+                saveRecipeMenuItem = menu.findItem(R.id.RecipeDetailMenu_Save)
+                deleteRecipeMenuItem = menu.findItem(R.id.RecipeDetailMenu_Delete)
 
-            override fun onPrepareMenu(menu: Menu) {
-                super.onPrepareMenu(menu)
+//                saveRecipeMenuItem.isVisible = false
+//                deleteRecipeMenuItem.isVisible = false
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
                     R.id.RecipeDetailMenu_Save -> {
-                        recipeSaveDelete()
+                        saveDeleteRecipe()
+                        return true
+                    }
+                    R.id.RecipeDetailMenu_Delete -> {
+                        saveDeleteRecipe()
                         return true
                     }
                 }
@@ -77,7 +83,7 @@ class RecipeDetailFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun recipeSaveDelete() {
+    private fun saveDeleteRecipe() {
         viewModel.saveOrDelete(viewModel.viewData.value!!)
 
         if (viewModel.viewData.value!!.recipe?.isSaved == true) {
@@ -130,15 +136,16 @@ class RecipeDetailFragment : Fragment() {
             tab.text = tabArray[position]
         }.attach()
 
-//        if (saveDeleteRecipeMenuItem != null) {
-//            if (viewData.recipe!!.isSaved) {
-//                saveDeleteRecipeMenuItem.setIcon(R.drawable.ic_bookmark_24_white)
-//                println("=====> Saved: " + saveDeleteRecipeMenuItem.icon.toString())
-//            } else {
-//                saveDeleteRecipeMenuItem.setIcon(R.drawable.ic_bookmark_border_24_white)
-//                println("=====> Not Saved: " + saveDeleteRecipeMenuItem.icon.toString())
-//            }
-//        }
+        val isSaved = if (viewData.recipe != null) {
+            viewData.recipe.isSaved
+        } else {
+            false
+        }
+
+        saveRecipeMenuItem.isVisible = !isSaved
+        deleteRecipeMenuItem.isVisible = isSaved
+
+        menuHost.invalidateMenu()
     }
 
     override fun onDestroyView() {
