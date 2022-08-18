@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.example.recipe.R
 import com.example.recipe.databinding.DialogAdvancedSearchOptionsBinding
 import com.example.recipe.ui.fragments.search.SearchViewModel
@@ -13,6 +15,8 @@ import com.example.recipe.ui.viewDataModels.SearchAdvancedFilterDialogViewData
 class SearchAdvancedFilterDialog: DialogFragment() {
 
     private lateinit var binding: DialogAdvancedSearchOptionsBinding
+    private val viewModel: SearchViewModel by activityViewModels()
+    private lateinit var cuisineAdapter: ArrayAdapter<CharSequence>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,6 +25,9 @@ class SearchAdvancedFilterDialog: DialogFragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DialogAdvancedSearchOptionsBinding.inflate(inflater, container, false)
+
+        configureSpinnerAdapters()
+        updateUI()
 
         binding.CloseDialog.setOnClickListener {
             dismiss()
@@ -33,33 +40,49 @@ class SearchAdvancedFilterDialog: DialogFragment() {
         return binding.root
     }
 
+    private fun configureSpinnerAdapters() {
+        cuisineAdapter = ArrayAdapter.createFromResource(requireContext(), R.array.cuisine_types, android.R.layout.simple_spinner_item)
+        cuisineAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.Cuisine.adapter = cuisineAdapter
+    }
+
+    private fun updateUI() {
+        viewModel.filterViewData.value?.cuisine?.let {
+            binding.Cuisine.setSelection(cuisineAdapter.getPosition(it))
+        }
+
+        viewModel.filterViewData.value?.maxReadyTime?.let {
+            binding.MaxReadyTimeET.setText(it.toString())
+        }
+    }
+
     private fun createAdvancedFilterObject(): SearchAdvancedFilterDialogViewData = SearchAdvancedFilterDialogViewData(
         cuisine = binding.Cuisine.selectedItem.toString().let {
             if (it == getString(R.string.title_please_select)) {
                 null
             } else {
-                it.lowercase()
+                it
             }
         },
         diet = binding.Diet.selectedItem.toString().let {
             if (it == getString(R.string.title_please_select)) {
                 null
             } else {
-                it.lowercase()
+                it
             }
         },
         intolerances = binding.Intolerances.selectedItem.toString().let {
             if (it == getString(R.string.title_please_select)) {
                 null
             } else {
-                it.lowercase()
+                it
             }
         },
         mealType = binding.MealType.selectedItem.toString().let {
             if (it == getString(R.string.title_please_select)) {
                 null
             } else {
-                it.lowercase()
+                it
             }
         },
         maxReadyTime = binding.MaxReadyTimeET.text.toString().toIntOrNull(),

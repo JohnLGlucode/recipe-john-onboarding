@@ -7,13 +7,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recipe.R
-import com.example.recipe.core.extensions.hide
-import com.example.recipe.core.extensions.show
+import com.example.recipe.core.extensions.visibleOrGone
 import com.example.recipe.databinding.FragmentSearchBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
 import com.example.recipe.ui.dialogs.searchAdvancedFilter.SearchAdvancedFilterDialog
@@ -28,7 +27,7 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
     private var searchQuery: String? = null
 
-    private val viewModel: SearchViewModel by viewModels()
+    private val viewModel: SearchViewModel by activityViewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -100,7 +99,6 @@ class SearchFragment : Fragment() {
     }
 
     private fun searchRecipes() {
-        showLoadingUI()
         searchQuery?.let { viewModel.searchRecipes(query = it) }
     }
 
@@ -123,23 +121,18 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun showLoadingUI() {
-        binding.EmptyListMessage.hide()
-        binding.SearchRecipes.hide()
-        binding.ProgressBar.show()
-    }
-
-    private fun hideLoadingUI() {
-        binding.EmptyListMessage.show()
-        binding.SearchRecipes.show()
-        binding.ProgressBar.hide()
+    private fun toggleLoadingUI(isLoading: Boolean) {
+        binding.EmptyListMessage.visibleOrGone(!isLoading)
+        binding.SearchRecipes.visibleOrGone(!isLoading)
+        binding.ProgressBar.visibleOrGone(isLoading)
     }
 
     private fun observeSearchResults() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
+            toggleLoadingUI(viewData.isLoading)
+
             viewData.searchRecipes ?: return@observe
 
-            hideLoadingUI()
             displaySearchResults(viewData.searchRecipes)
         }
     }
