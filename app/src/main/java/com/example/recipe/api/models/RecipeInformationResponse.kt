@@ -37,5 +37,6 @@ fun RecipeInformationResponse.toRecipeInformation() = RecipeInformation(
     extendedIngredients = extendedIngredients.map { ingredientResponse ->
         ingredientResponse.toIngredient()
     },
-    analyzedInstructions = emptyList()//analyzedInstructions.let { analyzedInstructions[0].toListOfInstructions() }
+    analyzedInstructions = emptyList(),//analyzedInstructions.let { analyzedInstructions[0].toListOfInstructions() }
+    isSaved = false
 )

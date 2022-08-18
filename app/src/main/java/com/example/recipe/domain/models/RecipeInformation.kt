@@ -14,5 +14,6 @@ data class RecipeInformation(
     val summary: String,
     val instructions: String,
     val extendedIngredients: List<Ingredients>,
-    val analyzedInstructions: List<Instructions>
+    val analyzedInstructions: List<Instructions>,
+    val isSaved: Boolean
 )

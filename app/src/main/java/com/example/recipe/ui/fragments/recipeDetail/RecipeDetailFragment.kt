@@ -10,14 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.recipe.R
-import com.example.recipe.core.extensions.hide
-import com.example.recipe.core.extensions.show
+import com.example.recipe.core.extensions.visibleOrGone
 import com.example.recipe.databinding.FragmentRecipeDetailBinding
 import com.example.recipe.ui.adapters.ViewPagerAdapter
 import com.example.recipe.ui.fragments.recipeDetail.detailsTabFragment.DetailsTabFragment
 import com.example.recipe.ui.fragments.recipeDetail.ingredientsTabFragment.IngredientsTabFragment
 import com.example.recipe.ui.fragments.recipeDetail.instructionsTabFragment.InstructionsTabFragment
 import com.example.recipe.ui.viewDataModels.RecipeDetailViewData
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,8 +27,8 @@ class RecipeDetailFragment : Fragment() {
     private var _binding: FragmentRecipeDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: RecipeDetailViewModel
-    private lateinit var tabArray: List<String>
     private val args: RecipeDetailFragmentArgs by navArgs()
+    //private lateinit var saveDeleteRecipeMenuItem: MenuItem
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +47,6 @@ class RecipeDetailFragment : Fragment() {
 
         getRecipeInformation()
         configureMenu()
-        configureTabs()
         observeRecipe()
     }
 
@@ -57,6 +56,12 @@ class RecipeDetailFragment : Fragment() {
         menuHost.addMenuProvider(object: MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.recipe_detail_menu, menu)
+
+                //saveDeleteRecipeMenuItem = menu.findItem(R.id.RecipeDetailMenu_Save)
+            }
+
+            override fun onPrepareMenu(menu: Menu) {
+                super.onPrepareMenu(menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -73,42 +78,30 @@ class RecipeDetailFragment : Fragment() {
     }
 
     private fun recipeSaveDelete() {
+        viewModel.saveOrDelete(viewModel.viewData.value!!)
 
+        if (viewModel.viewData.value!!.recipe?.isSaved == true) {
+            Snackbar.make(binding.root, getString(R.string.title_recipe_removed_from_saved_recipes), Snackbar.LENGTH_SHORT).show()
+        } else {
+            Snackbar.make(binding.root, getString(R.string.title_recipe_saved), Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     private fun getRecipeInformation() {
         viewModel.getRecipeInformation(args.recipeId)
     }
 
-    private fun configureTabs() {
-        tabArray = listOf(getString(R.string.title_details), getString(R.string.title_ingredients), getString(R.string.title_instructions))
-
-        binding.ViewPager2.adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
-    }
-
-    private fun showLoadingUI() {
-        binding.ProgressBar.show()
-        binding.Name.hide()
-        binding.ViewPager2.hide()
-        binding.Image.hide()
-        binding.TabLayout.hide()
-    }
-
-    private fun hideLoadingUI() {
-        binding.ProgressBar.hide()
-        binding.Name.show()
-        binding.ViewPager2.show()
-        binding.Image.show()
-        binding.TabLayout.show()
+    private fun toggleLoadingUI(isLoading: Boolean) {
+        binding.ProgressBar.visibleOrGone(isLoading)
+        binding.Name.visibleOrGone(!isLoading)
+        binding.ViewPager2.visibleOrGone(!isLoading)
+        binding.Image.visibleOrGone(!isLoading)
+        binding.TabLayout.visibleOrGone(!isLoading)
     }
 
     private fun observeRecipe() {
         viewModel.viewData.observe(viewLifecycleOwner) { viewData ->
-            if (viewData.isLoading) {
-                showLoadingUI()
-            } else {
-                hideLoadingUI()
-            }
+            toggleLoadingUI(viewData.isLoading)
 
             viewData.recipe ?: return@observe
             displayRecipeDetails(viewData)
@@ -125,15 +118,27 @@ class RecipeDetailFragment : Fragment() {
 
         binding.Name.text = viewData.recipe?.name
 
-        val pagerAdapter = (binding.ViewPager2.adapter as ViewPagerAdapter)
+        val pagerAdapter = ViewPagerAdapter(childFragmentManager, lifecycle)
         pagerAdapter.addFragment(DetailsTabFragment(viewData.recipe))
         pagerAdapter.addFragment(IngredientsTabFragment(viewData.recipe?.ingredients))
         pagerAdapter.addFragment(InstructionsTabFragment(viewData.recipe))
         binding.ViewPager2.adapter = pagerAdapter
 
+        val tabArray = listOf(getString(R.string.title_details), getString(R.string.title_ingredients), getString(R.string.title_instructions))
+
         TabLayoutMediator(binding.TabLayout, binding.ViewPager2) { tab, position ->
             tab.text = tabArray[position]
         }.attach()
+
+//        if (saveDeleteRecipeMenuItem != null) {
+//            if (viewData.recipe!!.isSaved) {
+//                saveDeleteRecipeMenuItem.setIcon(R.drawable.ic_bookmark_24_white)
+//                println("=====> Saved: " + saveDeleteRecipeMenuItem.icon.toString())
+//            } else {
+//                saveDeleteRecipeMenuItem.setIcon(R.drawable.ic_bookmark_border_24_white)
+//                println("=====> Not Saved: " + saveDeleteRecipeMenuItem.icon.toString())
+//            }
+//        }
     }
 
     override fun onDestroyView() {
