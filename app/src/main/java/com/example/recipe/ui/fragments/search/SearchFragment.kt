@@ -17,6 +17,7 @@ import com.example.recipe.databinding.FragmentSearchBinding
 import com.example.recipe.ui.adapters.RecipeAdapter
 import com.example.recipe.ui.dialogs.searchAdvancedFilter.SearchAdvancedFilterDialog
 import com.example.recipe.ui.viewDataModels.RecipeViewData
+import com.example.recipe.ui.viewDataModels.SearchAdvancedFilterDialogViewData
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,6 +47,7 @@ class SearchFragment : Fragment() {
         configureMenu()
         configureList()
         observeSearchResults()
+        observeAdvancedFilter()
     }
 
     override fun onDestroyView() {
@@ -98,8 +100,18 @@ class SearchFragment : Fragment() {
         })
     }
 
-    private fun searchRecipes() {
-        searchQuery?.let { viewModel.searchRecipes(query = it) }
+    private fun searchRecipes(filter: SearchAdvancedFilterDialogViewData? = null) {
+        searchQuery?.let {
+            if (filter != null) {
+                viewModel.searchRecipes(
+                    query = it
+                )
+            } else {
+                viewModel.searchRecipes(
+                    query = it
+                )
+            }
+        }
     }
 
     private fun configureList() = with(binding.SearchRecipes) {
@@ -134,6 +146,12 @@ class SearchFragment : Fragment() {
             viewData.searchRecipes ?: return@observe
 
             displaySearchResults(viewData.searchRecipes)
+        }
+    }
+
+    private fun observeAdvancedFilter() {
+        viewModel.filterViewData.observe(viewLifecycleOwner) { filters ->
+            searchRecipes(filters)
         }
     }
 

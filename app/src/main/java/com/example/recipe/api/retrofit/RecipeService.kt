@@ -18,7 +18,32 @@ interface RecipeService {
         @Query("cuisine") cuisine: String? = null,
         @Query("diet") diet: String? = null,
         @Query("intolerances") intolerances: String? = null,
-        @Query("type") mealType: String? = null
+        @Query("type") mealType: String? = null,
+        @Query("maxReadyTime") maxReadyTime: Int? = null,
+        @Query("minCaffeine") minCaffeine: Int? = null,
+        @Query("maxCaffeine") maxCaffeine: Int? = null,
+        @Query("minCalcium") minCalcium: Int? = null,
+        @Query("maxCalcium") maxCalcium: Int? = null,
+        @Query("minCarbs") minCarbs: Int? = null,
+        @Query("maxCarbs") maxCarbs: Int? = null,
+        @Query("minCholesterol") minCholesterol: Int? = null,
+        @Query("maxCholesterol") maxCholesterol: Int? = null,
+        @Query("minFat") minFat: Int? = null,
+        @Query("maxFat") maxFat: Int? = null,
+        @Query("minFiber") minFiber: Int? = null,
+        @Query("maxFiber") maxFiber: Int? = null,
+        @Query("minIron") minIron: Int? = null,
+        @Query("maxIron") maxIron: Int? = null,
+        @Query("minProtein") minProtein: Int? = null,
+        @Query("maxProtein") maxProtein: Int? = null,
+        @Query("minSaturatedFat") minSaturatedFat: Int? = null,
+        @Query("maxSaturatedFat") maxSaturatedFat: Int? = null,
+        @Query("minSodium") minSodium: Int? = null,
+        @Query("maxSodium") maxSodium: Int? = null,
+        @Query("minSugar") minSugar: Int? = null,
+        @Query("maxSugar") maxSugar: Int? = null,
+        @Query("minZinc") minZinc: Int? = null,
+        @Query("maxZinc") maxZinc: Int? = null
     ): Response<RecipeSearchResponse>
 
     @GET("/recipes/{id}/information")
